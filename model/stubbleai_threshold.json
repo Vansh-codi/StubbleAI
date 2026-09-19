@@ -1,0 +1,5 @@
+{
+    "threshold": 0.4,
+    "target": "elevated_next_day",
+    "threshold_selection": "2024 validation set, maximum F1"
+}

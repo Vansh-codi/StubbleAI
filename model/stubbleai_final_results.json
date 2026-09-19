@@ -1,0 +1,38 @@
+{
+    "project": "StubbleAI",
+    "experiment": "Clean Temporal Experiment",
+    "training_year": 2023,
+    "validation_year": 2024,
+    "test_year": 2025,
+    "training_rows": 2430,
+    "validation_rows": 2745,
+    "test_rows": 2700,
+    "target": "elevated_next_day",
+    "target_definition": "next_day_fire_count > 2",
+    "model": "Random Forest",
+    "n_estimators": 400,
+    "class_weight": "balanced",
+    "min_samples_leaf": 2,
+    "random_state": 42,
+    "threshold": 0.4,
+    "threshold_selection": "2024 validation set, maximum F1",
+    "metrics_2025": {
+        "accuracy": 0.8148,
+        "balanced_accuracy": 0.7935,
+        "precision": 0.6678,
+        "recall": 0.7415,
+        "f1": 0.7027,
+        "roc_auc": 0.8779,
+        "pr_auc": 0.7926
+    },
+    "confusion_matrix": [
+        [
+            1609,
+            294
+        ],
+        [
+            206,
+            591
+        ]
+    ]
+}

@@ -1,0 +1,14 @@
+{
+  "accuracy": 0.8148148148148148,
+  "balanced_accuracy": 0.7935189171690212,
+  "precision": 0.6677966101694915,
+  "recall": 0.7415307402760352,
+  "f1": 0.7027348394768134,
+  "roc_auc": 0.8779408594103875,
+  "pr_auc": 0.7926154147652495,
+  "threshold": 0.4,
+  "training_year": 2023,
+  "validation_year": 2024,
+  "test_year": 2025,
+  "test_rows": 2700
+}

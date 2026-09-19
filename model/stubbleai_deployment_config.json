@@ -1,0 +1,13 @@
+{
+    "model_type": "Random Forest",
+    "n_estimators": 400,
+    "class_weight": "balanced",
+    "min_samples_leaf": 2,
+    "random_state": 42,
+    "training_period": "2023-2025",
+    "target": "elevated_next_day",
+    "target_definition": "next_day_fire_count > 2",
+    "threshold": 0.4,
+    "purpose": "Future/live inference",
+    "research_model": "model/stubbleai_final_model.pkl"
+}

@@ -1,0 +1,46 @@
+prediction_date,state,district,risk_probability,risk_label,fire_lag_1d,fire_lag_3d,fire_lag_7d,fire_mean_3d,fire_mean_7d,T2M,RH2M,WS2M,PRECTOTCORR,fire_count,actual_risk,verification_status,error_type
+2026-09-19,Punjab,Amritsar,0.4940881614367354,Elevated,0.0,3.0,0.0,2.333333333333333,2.142857142857143,26.8,72,3.4,0.0,,,Pending,Pending
+2026-09-19,Haryana,Faridabad,0.3703578441271682,Normal,1.0,1.0,0.0,0.6666666666666666,1.7142857142857142,28.3,69,5.0,0.0,,,Pending,Pending
+2026-09-19,Punjab,Tarn Taran,0.3237950824598482,Normal,0.0,2.0,1.0,1.0,0.8571428571428571,27.3,72,3.1,0.0,,,Pending,Pending
+2026-09-19,Haryana,Jhajjar,0.273342579834659,Normal,1.0,2.0,0.0,1.0,0.8571428571428571,27.6,71,5.0,0.0,,,Pending,Pending
+2026-09-19,Punjab,Ferozepur,0.2592150642081641,Normal,0.0,2.0,0.0,0.6666666666666666,0.2857142857142857,28.2,70,2.7,0.0,,,Pending,Pending
+2026-09-19,Punjab,Mansa,0.2478682919638339,Normal,0.0,2.0,0.0,0.6666666666666666,0.2857142857142857,27.8,74,3.1,0.0,,,Pending,Pending
+2026-09-19,Punjab,Bathinda,0.2459162095361821,Normal,0.0,1.0,0.0,0.3333333333333333,0.7142857142857143,28.5,68,2.3,0.0,,,Pending,Pending
+2026-09-19,Punjab,Kapurthala,0.2056367845900016,Normal,0.0,0.0,0.0,0.0,0.0,27.4,71,2.4,0.0,,,Pending,Pending
+2026-09-19,Punjab,Hoshiarpur,0.1905894170209753,Normal,0.0,1.0,0.0,0.6666666666666666,0.2857142857142857,27.7,63,4.5,0.0,,,Pending,Pending
+2026-09-19,Punjab,Fazilka,0.1847947920537488,Normal,0.0,0.0,0.0,0.0,0.0,28.5,69,2.8,0.0,,,Pending,Pending
+2026-09-19,Haryana,Panipat,0.1803877874904513,Normal,0.0,1.0,0.0,0.3333333333333333,0.1428571428571428,27.2,74,4.2,0.0,,,Pending,Pending
+2026-09-19,Punjab,Patiala,0.1771567976333444,Normal,0.0,0.0,0.0,0.3333333333333333,0.1428571428571428,27.6,68,4.4,0.0,,,Pending,Pending
+2026-09-19,Haryana,Jind,0.1738155247712901,Normal,0.0,0.0,0.0,0.0,0.0,27.5,74,3.6,0.0,,,Pending,Pending
+2026-09-19,Haryana,Rohtak,0.1718253029469136,Normal,0.0,0.0,0.0,0.0,0.0,27.6,70,4.2,0.0,,,Pending,Pending
+2026-09-19,Haryana,Sirsa,0.1690237159406312,Normal,0.0,0.0,0.0,0.0,0.0,28.3,72,3.0,0.0,,,Pending,Pending
+2026-09-19,Haryana,Kaithal,0.1676486122145426,Normal,0.0,0.0,0.0,0.0,0.0,27.1,73,4.6,0.0,,,Pending,Pending
+2026-09-19,Punjab,Gurdaspur,0.1600195404423009,Normal,0.0,0.0,0.0,0.0,0.0,27.1,70,3.4,0.0,,,Pending,Pending
+2026-09-19,Haryana,Karnal,0.1560455029897886,Normal,0.0,0.0,0.0,0.0,0.0,27.4,71,5.2,0.0,,,Pending,Pending
+2026-09-19,Haryana,Hisar,0.1529977170089241,Normal,0.0,0.0,1.0,0.0,0.2857142857142857,28.2,68,3.4,0.0,,,Pending,Pending
+2026-09-19,Haryana,Sonipat,0.1437208041624508,Normal,0.0,0.0,0.0,0.0,0.0,27.7,69,4.2,0.0,,,Pending,Pending
+2026-09-19,Haryana,Bhiwani,0.1379539768930894,Normal,0.0,0.0,0.0,0.0,0.0,27.7,70,4.5,0.0,,,Pending,Pending
+2026-09-19,Punjab,Ludhiana,0.1379504519037436,Normal,0.0,0.0,0.0,0.0,0.1428571428571428,27.7,66,4.0,0.0,,,Pending,Pending
+2026-09-19,Punjab,Sri Muktsar Sahib,0.1367280776105423,Normal,0.0,0.0,0.0,0.0,0.0,28.3,71,2.6,0.0,,,Pending,Pending
+2026-09-19,Haryana,Kurukshetra,0.1364692009454612,Normal,0.0,0.0,0.0,0.0,0.0,26.9,72,4.6,0.0,,,Pending,Pending
+2026-09-19,Punjab,Fatehgarh Sahib,0.1325846035409895,Normal,0.0,0.0,0.0,0.0,0.0,27.2,67,5.2,0.0,,,Pending,Pending
+2026-09-19,Punjab,Jalandhar,0.1305848907948868,Normal,0.0,0.0,0.0,0.0,0.0,27.3,72,2.6,0.0,,,Pending,Pending
+2026-09-19,Haryana,Fatehabad,0.1303795868546311,Normal,0.0,0.0,0.0,0.0,0.0,27.8,74,3.2,0.0,,,Pending,Pending
+2026-09-19,Haryana,Yamunanagar,0.1282381885776004,Normal,0.0,0.0,0.0,0.0,0.0,26.6,75,3.5,0.0,,,Pending,Pending
+2026-09-19,Punjab,Malerkotla,0.1225883541917399,Normal,0.0,0.0,0.0,0.0,0.0,27.0,73,3.9,0.0,,,Pending,Pending
+2026-09-19,Punjab,Sangrur,0.1192828944791296,Normal,0.0,0.0,0.0,0.0,0.0,27.5,73,4.1,0.0,,,Pending,Pending
+2026-09-19,Haryana,Gurugram,0.1189426696956185,Normal,0.0,0.0,0.0,0.0,0.1428571428571428,27.4,70,5.0,0.0,,,Pending,Pending
+2026-09-19,Punjab,Barnala,0.1175339912381157,Normal,0.0,0.0,0.0,0.0,0.0,27.1,76,2.2,0.0,,,Pending,Pending
+2026-09-19,Punjab,Faridkot,0.1160849566972788,Normal,0.0,0.0,0.0,0.0,0.0,28.2,70,2.7,0.0,,,Pending,Pending
+2026-09-19,Punjab,Shahid Bhagat Singh Nagar,0.1035684239739998,Normal,0.0,0.0,0.0,0.0,0.0,28.3,61,5.3,0.0,,,Pending,Pending
+2026-09-19,Haryana,Rewari,0.0991076723715837,Normal,0.0,0.0,0.0,0.0,0.0,28.0,66,6.1,0.0,,,Pending,Pending
+2026-09-19,Haryana,Ambala,0.0984124046096539,Normal,0.0,0.0,0.0,0.0,0.0,27.2,67,3.2,0.0,,,Pending,Pending
+2026-09-19,Haryana,Palwal,0.0959073023033098,Normal,0.0,0.0,0.0,0.0,0.0,27.5,73,5.5,0.0,,,Pending,Pending
+2026-09-19,Punjab,S A S Nagar,0.0917613557213597,Normal,0.0,0.0,0.0,0.0,0.0,26.9,67,2.9,0.0,,,Pending,Pending
+2026-09-19,Punjab,Pathankot,0.084905414860355,Normal,0.0,0.0,0.0,0.0,0.0,25.3,72,4.3,0.0,,,Pending,Pending
+2026-09-19,Haryana,Panchkula,0.0775390441954874,Normal,0.0,0.0,0.0,0.0,0.0,24.3,70,5.3,0.4,,,Pending,Pending
+2026-09-19,Punjab,Moga,0.0762931240934201,Normal,0.0,0.0,0.0,0.0,0.0,28.1,68,2.1,0.0,,,Pending,Pending
+2026-09-19,Punjab,Rupnagar,0.0665859547768868,Normal,0.0,0.0,0.0,0.0,0.0,26.7,68,1.7,0.0,,,Pending,Pending
+2026-09-19,Haryana,Charkhi Dadri,0.0620542678354131,Normal,0.0,0.0,0.0,0.0,0.0,27.5,70,4.7,0.0,,,Pending,Pending
+2026-09-19,Haryana,Nuh,0.0537837820559745,Normal,0.0,0.0,0.0,0.0,0.0,27.9,70,5.4,0.0,,,Pending,Pending
+2026-09-19,Haryana,Mahendragarh,0.053316896560678,Normal,0.0,0.0,0.0,0.0,0.0,27.7,68,5.5,0.0,,,Pending,Pending
