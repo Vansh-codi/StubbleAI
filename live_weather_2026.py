@@ -131,7 +131,7 @@ for i, row in districts.iterrows():
         "timezone": "Asia/Kolkata",
 
         "temperature_unit": "celsius",
-        "wind_speed_unit": "kmh",
+        "wind_speed_unit": "ms",
         "precipitation_unit": "mm",
     }
 
@@ -196,24 +196,27 @@ for i, row in districts.iterrows():
             )
 
         weather = pd.DataFrame({
-            "date": daily["time"],
+    "date": daily["time"],
 
-            "T2M": daily[
-                "temperature_2m_mean"
-            ],
+    "T2M": daily[
+        "temperature_2m_mean"
+    ],
 
-            "RH2M": daily[
-                "relative_humidity_2m_mean"
-            ],
+    "RH2M": daily[
+        "relative_humidity_2m_mean"
+    ],
 
-            "WS2M": daily[
-                "wind_speed_10m_mean"
-            ],
+    # Open-Meteo provides wind at 10 m in m/s.
+    # Convert approximately to 2 m to match NASA POWER WS2M.
+    "WS2M": (
+        pd.Series(daily["wind_speed_10m_mean"], dtype="float64")
+        * 0.748
+    ),
 
-            "PRECTOTCORR": daily[
-                "precipitation_sum"
-            ]
-        })
+    "PRECTOTCORR": daily[
+        "precipitation_sum"
+    ]
+})
 
         weather["date"] = pd.to_datetime(
             weather["date"],

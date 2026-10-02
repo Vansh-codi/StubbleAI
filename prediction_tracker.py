@@ -9,7 +9,7 @@ import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent
 
-PREDICTION_FILE = BASE_DIR / "stubbleai_2026_predictions.csv"
+PREDICTION_FILE = BASE_DIR / "stubbleai_2026_prediction_history.csv"
 TRACKER_FILE = BASE_DIR / "prediction_tracker.csv"
 ACTUAL_FIRE_FILE = BASE_DIR / "live_district_fire_2026.csv"
 
