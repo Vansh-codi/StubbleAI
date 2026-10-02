@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
+
 export default function PredictionTracker() {
   const [tracker, setTracker] = useState({
     rows: [],
@@ -16,7 +21,7 @@ export default function PredictionTracker() {
 
   const loadTracker = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/tracker");
+      const response = await fetch(`${API_URL}/api/tracker`);
 
       if (!response.ok) {
         throw new Error("Unable to load prediction tracker");

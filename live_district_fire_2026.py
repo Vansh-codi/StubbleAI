@@ -178,8 +178,7 @@ if districts.empty:
 
 expected_district_count = 45
 
-if districts["district"].nunique() != expected_district_count:
-    duplicate_districts = districts.duplicated(
+duplicate_districts = districts.duplicated(
     subset=["state", "district"],
     keep=False
 )
@@ -196,9 +195,12 @@ if duplicate_districts.any():
     raise ValueError(
         "Boundary file contains duplicate state-district entries."
     )
+
+if len(districts) != expected_district_count:
     raise ValueError(
         f"Expected {expected_district_count} Punjab/Haryana districts, "
-        f"found {districts['district'].nunique()}."
+        f"found {len(districts)} rows "
+        f"({districts['district'].nunique()} unique names)."
     )
 
 # ------------------------------------------------------------

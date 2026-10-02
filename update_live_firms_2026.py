@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import date, datetime, timedelta, timezone
 from io import StringIO
 
 import pandas as pd
@@ -30,12 +31,28 @@ if not MAP_KEY:
 BBOX = "73.5,27.5,77.5,32.5"
 
 SOURCES = [
-    "VIIRS_NOAA20_NRT",
-    "VIIRS_NOAA21_NRT",
+     "VIIRS_NOAA20_NRT",
 ]
 
-HISTORY_FILE = "live_firms_2026_history.csv"
+HISTORY_FILE = os.path.join(BASE_DIR, "live_firms_2026_history.csv")
+SEASON_START = date(2026, 9, 1)   # earliest date to backfill
 
+today = datetime.now(timezone.utc).date()
+
+if os.path.exists(HISTORY_FILE):
+    last = pd.to_datetime(
+        pd.read_csv(HISTORY_FILE, usecols=["acq_date"])["acq_date"]
+    ).max().date()
+    # Re-fetch the last 2 days too: NRT detections can arrive late
+    start = max(SEASON_START, last - timedelta(days=2))
+else:
+    start = SEASON_START
+
+query_starts = []
+d = start
+while d <= today:
+    query_starts.append(d.isoformat())
+    d += timedelta(days=5)
 
 print("=" * 70)
 print("STUBBLEAI - UPDATE 2026 FIRMS HISTORY")
@@ -51,15 +68,8 @@ for source in SOURCES:
     print(f"Downloading: {source}")
 
     # ------------------------------------------------------------
-    # Query:
-    # 1. Latest available live FIRMS window
-    # 2. Historical backfill for feature warm-up
+    # Query 5-day windows from start -> today, same for every source
     # ------------------------------------------------------------
-
-    query_starts = [
-        None,
-        "2026-09-11",
-    ]
 
     for query_start in query_starts:
 

@@ -548,10 +548,26 @@ if missing_latest.any():
 
 
 
-if features[required_feature_columns].isna().any().any():
+# Drop unavoidable warm-up rows (first ~7 days of each
+# season/period, where there isn't enough prior history yet).
+# This mirrors the dropna step in build_ml_dataset.py.
+before_drop = len(features)
+
+features = features.dropna(
+    subset=required_feature_columns
+).reset_index(drop=True)
+
+print()
+print(
+    f"Dropped {before_drop - len(features)} warm-up rows "
+    "with insufficient prior history."
+)
+
+if features.empty:
     raise ValueError(
-        "Generated fire features contain missing values."
+        "No feature rows remain after removing warm-up rows."
     )
+
 features.to_csv(
     OUTPUT_FILE,
     index=False
