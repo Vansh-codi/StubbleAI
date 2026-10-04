@@ -1,0 +1,11 @@
+{
+    "horizon": "+1d",
+    "models": {
+        "Logistic Regression": 0.31191919191919193,
+        "Random Forest": 0.4109090909090909,
+        "XGBoost": 0.31191919191919193,
+        "LightGBM": 0.37626262626262624
+    },
+    "selected_on": "2024 validation \u2014 F1 maximisation",
+    "frozen_for": "2025 test"
+}
