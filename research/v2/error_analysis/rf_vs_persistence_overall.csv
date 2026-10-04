@@ -1,0 +1,5 @@
+category,count,percentage
+Both correct,6120,68.0
+Both wrong,1226,13.622222222222222
+Persistence only correct,855,9.5
+RF only correct,799,8.877777777777778

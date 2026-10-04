@@ -1,0 +1,6 @@
+horizon,emerging_events,rf_caught,rf_missed,rf_recall,persistence_caught,persistence_missed,persistence_recall,rf_only_caught,persistence_only_caught
++1d,161,65,96,0.40372670807453415,0,161,0.0,65,0
++2d,191,92,99,0.4816753926701571,0,191,0.0,92,0
++3d,208,129,79,0.6201923076923077,0,208,0.0,129,0
++5d,197,111,86,0.5634517766497462,0,197,0.0,111,0
++7d,217,136,81,0.6267281105990783,0,217,0.0,136,0
