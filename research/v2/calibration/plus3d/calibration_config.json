@@ -1,0 +1,82 @@
+{
+  "experiment": "V2 multi-horizon temporal probability calibration",
+  "horizon": 3,
+  "target_column": "fire_count_t_plus_3d",
+  "elevated_threshold": 2,
+  "random_state": 42,
+  "model_training": {
+    "year": 2023,
+    "start": "2023-10-15",
+    "end": "2023-11-23"
+  },
+  "calibration_fit": {
+    "start": "2024-10-15",
+    "end": "2024-11-03"
+  },
+  "calibration_check": {
+    "start": "2024-11-04",
+    "end": "2024-11-23"
+  },
+  "final_test": {
+    "start": "2025-10-15",
+    "end": "2025-11-23"
+  },
+  "calibration_method": "sigmoid_platt",
+  "models": [
+    "Logistic Regression",
+    "Random Forest",
+    "XGBoost",
+    "LightGBM"
+  ],
+  "feature_count_numeric": 36,
+  "categorical_features": [
+    "state",
+    "district"
+  ],
+  "model_calibration_parameters": {
+    "Logistic Regression": {
+      "method": "sigmoid_platt",
+      "calibration_fit_start": "2024-10-15",
+      "calibration_fit_end": "2024-11-03",
+      "calibration_check_start": "2024-11-04",
+      "calibration_check_end": "2024-11-23",
+      "raw_threshold_selected_on_2024B": 0.12878787878787878,
+      "calibrated_threshold_selected_on_2024B": 0.21292929292929294,
+      "calibrator_intercept": 0.3259276265576333,
+      "calibrator_coefficient": 0.8524288392759053
+    },
+    "Random Forest": {
+      "method": "sigmoid_platt",
+      "calibration_fit_start": "2024-10-15",
+      "calibration_fit_end": "2024-11-03",
+      "calibration_check_start": "2024-11-04",
+      "calibration_check_end": "2024-11-23",
+      "raw_threshold_selected_on_2024B": 0.29707070707070704,
+      "calibrated_threshold_selected_on_2024B": 0.24757575757575756,
+      "calibrator_intercept": -0.14402590119282774,
+      "calibrator_coefficient": 1.1155768796032481
+    },
+    "XGBoost": {
+      "method": "sigmoid_platt",
+      "calibration_fit_start": "2024-10-15",
+      "calibration_fit_end": "2024-11-03",
+      "calibration_check_start": "2024-11-04",
+      "calibration_check_end": "2024-11-23",
+      "raw_threshold_selected_on_2024B": 0.07929292929292929,
+      "calibrated_threshold_selected_on_2024B": 0.2871717171717172,
+      "calibrator_intercept": 0.037925397762044524,
+      "calibrator_coefficient": 0.39098823155527995
+    },
+    "LightGBM": {
+      "method": "sigmoid_platt",
+      "calibration_fit_start": "2024-10-15",
+      "calibration_fit_end": "2024-11-03",
+      "calibration_check_start": "2024-11-04",
+      "calibration_check_end": "2024-11-23",
+      "raw_threshold_selected_on_2024B": 0.09414141414141414,
+      "calibrated_threshold_selected_on_2024B": 0.32676767676767676,
+      "calibrator_intercept": 0.04542325511489645,
+      "calibrator_coefficient": 0.3401388209570764
+    }
+  }
+}
