@@ -1,0 +1,16 @@
+arm,arm_label,horizon,n_emerging_events,detected_emerging_events,emerging_recall
+v2,V2,+1d,161,65,0.40372670807453415
+v2,V2,+2d,191,92,0.4816753926701571
+v2,V2,+3d,208,129,0.6201923076923077
+v2,V2,+5d,197,111,0.5634517766497462
+v2,V2,+7d,217,136,0.6267281105990783
+spatial,V2.3 Spatial,+1d,161,72,0.4472049689440994
+spatial,V2.3 Spatial,+2d,191,90,0.4712041884816754
+spatial,V2.3 Spatial,+3d,208,125,0.6009615384615384
+spatial,V2.3 Spatial,+5d,197,103,0.5228426395939086
+spatial,V2.3 Spatial,+7d,217,150,0.6912442396313364
+spatiotemporal,V2.4 Spatio-Temporal,+1d,161,48,0.2981366459627329
+spatiotemporal,V2.4 Spatio-Temporal,+2d,191,92,0.4816753926701571
+spatiotemporal,V2.4 Spatio-Temporal,+3d,208,111,0.5336538461538461
+spatiotemporal,V2.4 Spatio-Temporal,+5d,197,117,0.5939086294416244
+spatiotemporal,V2.4 Spatio-Temporal,+7d,217,146,0.6728110599078341
