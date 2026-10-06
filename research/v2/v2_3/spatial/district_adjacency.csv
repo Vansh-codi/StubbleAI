@@ -1,0 +1,209 @@
+district,neighbor
+Ambala,Kurukshetra
+Ambala,Panchkula
+Ambala,Patiala
+Ambala,S A S Nagar
+Ambala,Yamunanagar
+Amritsar,Gurdaspur
+Amritsar,Kapurthala
+Amritsar,Tarn Taran
+Barnala,Bathinda
+Barnala,Ludhiana
+Barnala,Malerkotla
+Barnala,Mansa
+Barnala,Moga
+Barnala,Sangrur
+Bathinda,Barnala
+Bathinda,Faridkot
+Bathinda,Mansa
+Bathinda,Moga
+Bathinda,Sirsa
+Bathinda,Sri Muktsar Sahib
+Bhiwani,Charkhi Dadri
+Bhiwani,Hisar
+Bhiwani,Mahendragarh
+Bhiwani,Rohtak
+Charkhi Dadri,Bhiwani
+Charkhi Dadri,Jhajjar
+Charkhi Dadri,Mahendragarh
+Charkhi Dadri,Rohtak
+Faridabad,Gurugram
+Faridabad,Palwal
+Faridkot,Bathinda
+Faridkot,Ferozepur
+Faridkot,Moga
+Faridkot,Sri Muktsar Sahib
+Fatehabad,Hisar
+Fatehabad,Jind
+Fatehabad,Mansa
+Fatehabad,Sirsa
+Fatehgarh Sahib,Ludhiana
+Fatehgarh Sahib,Malerkotla
+Fatehgarh Sahib,Patiala
+Fatehgarh Sahib,Rupnagar
+Fatehgarh Sahib,S A S Nagar
+Fazilka,Ferozepur
+Fazilka,Sri Muktsar Sahib
+Ferozepur,Faridkot
+Ferozepur,Fazilka
+Ferozepur,Jalandhar
+Ferozepur,Kapurthala
+Ferozepur,Moga
+Ferozepur,Sri Muktsar Sahib
+Ferozepur,Tarn Taran
+Gurdaspur,Amritsar
+Gurdaspur,Hoshiarpur
+Gurdaspur,Kapurthala
+Gurdaspur,Pathankot
+Gurugram,Faridabad
+Gurugram,Jhajjar
+Gurugram,Nuh
+Gurugram,Palwal
+Gurugram,Rewari
+Hisar,Bhiwani
+Hisar,Fatehabad
+Hisar,Jind
+Hisar,Rohtak
+Hoshiarpur,Gurdaspur
+Hoshiarpur,Jalandhar
+Hoshiarpur,Kapurthala
+Hoshiarpur,Rupnagar
+Hoshiarpur,Shahid Bhagat Singh Nagar
+Jalandhar,Ferozepur
+Jalandhar,Hoshiarpur
+Jalandhar,Kapurthala
+Jalandhar,Ludhiana
+Jalandhar,Moga
+Jalandhar,Shahid Bhagat Singh Nagar
+Jhajjar,Charkhi Dadri
+Jhajjar,Gurugram
+Jhajjar,Mahendragarh
+Jhajjar,Rewari
+Jhajjar,Rohtak
+Jhajjar,Sonipat
+Jind,Fatehabad
+Jind,Hisar
+Jind,Kaithal
+Jind,Karnal
+Jind,Panipat
+Jind,Patiala
+Jind,Rohtak
+Jind,Sangrur
+Jind,Sonipat
+Kaithal,Jind
+Kaithal,Karnal
+Kaithal,Kurukshetra
+Kaithal,Patiala
+Kapurthala,Amritsar
+Kapurthala,Ferozepur
+Kapurthala,Gurdaspur
+Kapurthala,Hoshiarpur
+Kapurthala,Jalandhar
+Kapurthala,Shahid Bhagat Singh Nagar
+Kapurthala,Tarn Taran
+Karnal,Jind
+Karnal,Kaithal
+Karnal,Kurukshetra
+Karnal,Panipat
+Karnal,Yamunanagar
+Kurukshetra,Ambala
+Kurukshetra,Kaithal
+Kurukshetra,Karnal
+Kurukshetra,Patiala
+Kurukshetra,Yamunanagar
+Ludhiana,Barnala
+Ludhiana,Fatehgarh Sahib
+Ludhiana,Jalandhar
+Ludhiana,Malerkotla
+Ludhiana,Moga
+Ludhiana,Rupnagar
+Ludhiana,Shahid Bhagat Singh Nagar
+Mahendragarh,Bhiwani
+Mahendragarh,Charkhi Dadri
+Mahendragarh,Jhajjar
+Mahendragarh,Rewari
+Malerkotla,Barnala
+Malerkotla,Fatehgarh Sahib
+Malerkotla,Ludhiana
+Malerkotla,Patiala
+Malerkotla,Sangrur
+Mansa,Barnala
+Mansa,Bathinda
+Mansa,Fatehabad
+Mansa,Sangrur
+Mansa,Sirsa
+Moga,Barnala
+Moga,Bathinda
+Moga,Faridkot
+Moga,Ferozepur
+Moga,Jalandhar
+Moga,Ludhiana
+Nuh,Gurugram
+Nuh,Palwal
+Nuh,Rewari
+Palwal,Faridabad
+Palwal,Gurugram
+Palwal,Nuh
+Panchkula,Ambala
+Panchkula,S A S Nagar
+Panipat,Jind
+Panipat,Karnal
+Panipat,Sonipat
+Pathankot,Gurdaspur
+Patiala,Ambala
+Patiala,Fatehgarh Sahib
+Patiala,Jind
+Patiala,Kaithal
+Patiala,Kurukshetra
+Patiala,Malerkotla
+Patiala,S A S Nagar
+Patiala,Sangrur
+Rewari,Gurugram
+Rewari,Jhajjar
+Rewari,Mahendragarh
+Rewari,Nuh
+Rohtak,Bhiwani
+Rohtak,Charkhi Dadri
+Rohtak,Hisar
+Rohtak,Jhajjar
+Rohtak,Jind
+Rohtak,Sonipat
+Rupnagar,Fatehgarh Sahib
+Rupnagar,Hoshiarpur
+Rupnagar,Ludhiana
+Rupnagar,S A S Nagar
+Rupnagar,Shahid Bhagat Singh Nagar
+S A S Nagar,Ambala
+S A S Nagar,Fatehgarh Sahib
+S A S Nagar,Panchkula
+S A S Nagar,Patiala
+S A S Nagar,Rupnagar
+Sangrur,Barnala
+Sangrur,Jind
+Sangrur,Malerkotla
+Sangrur,Mansa
+Sangrur,Patiala
+Shahid Bhagat Singh Nagar,Hoshiarpur
+Shahid Bhagat Singh Nagar,Jalandhar
+Shahid Bhagat Singh Nagar,Kapurthala
+Shahid Bhagat Singh Nagar,Ludhiana
+Shahid Bhagat Singh Nagar,Rupnagar
+Sirsa,Bathinda
+Sirsa,Fatehabad
+Sirsa,Mansa
+Sirsa,Sri Muktsar Sahib
+Sonipat,Jhajjar
+Sonipat,Jind
+Sonipat,Panipat
+Sonipat,Rohtak
+Sri Muktsar Sahib,Bathinda
+Sri Muktsar Sahib,Faridkot
+Sri Muktsar Sahib,Fazilka
+Sri Muktsar Sahib,Ferozepur
+Sri Muktsar Sahib,Sirsa
+Tarn Taran,Amritsar
+Tarn Taran,Ferozepur
+Tarn Taran,Kapurthala
+Yamunanagar,Ambala
+Yamunanagar,Karnal
+Yamunanagar,Kurukshetra
