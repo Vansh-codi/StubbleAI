@@ -1,14 +1,14 @@
 from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import geopandas as gpd
 
 # ============================================================
 # STUBBLEAI — PAPER FIGURE GENERATOR
 # Generates publication figures directly from research artifacts
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 V2_DIR = BASE_DIR / "research" / "v2"
 OUT_DIR = BASE_DIR / "research" / "paper" / "figures"
 
@@ -190,7 +190,113 @@ def load_persistence_results():
 
     return pd.DataFrame(rows)
 
+# ============================================================
+# FIGURE 1
+# STUDY AREA MAP
+# ============================================================
 
+def figure_1_study_area():
+    print("\nGenerating Figure 1...")
+
+    geojson_file = BASE_DIR / "districts_punjab_haryana.geojson"
+
+    if not geojson_file.exists():
+        raise FileNotFoundError(geojson_file)
+
+    gdf = gpd.read_file(geojson_file)
+
+    required = {"name", "state"}
+    missing = required - set(gdf.columns)
+    if missing:
+        raise ValueError(f"Missing GeoJSON columns: {sorted(missing)}")
+
+    if gdf.crs is None:
+        gdf = gdf.set_crs("EPSG:4326")
+
+    print(f"  Districts: {len(gdf)}")
+    print(f"  States: {sorted(gdf['state'].dropna().unique())}")
+
+    fig, ax = plt.subplots(figsize=(7.2, 6.5))
+
+    # District boundaries
+    gdf.boundary.plot(
+        ax=ax,
+        linewidth=0.55,
+        edgecolor="black"
+    )
+
+    # Light state-level distinction
+    for state in sorted(gdf["state"].unique()):
+        subset = gdf[gdf["state"] == state]
+        subset.plot(
+            ax=ax,
+            alpha=0.18,
+            edgecolor="black",
+            linewidth=0.55,
+            label=state
+        )
+
+    # District labels
+    for _, row in gdf.iterrows():
+        point = row.geometry.representative_point()
+        ax.text(
+            point.x,
+            point.y,
+            row["name"],
+            fontsize=5.5,
+            ha="center",
+            va="center"
+        )
+
+    # State labels
+    for state in sorted(gdf["state"].unique()):
+        subset = gdf[gdf["state"] == state]
+        point = subset.geometry.unary_union.representative_point()
+
+        ax.text(
+            point.x,
+            point.y,
+            state,
+            fontsize=12,
+            fontweight="bold",
+            ha="center",
+            va="center"
+        )
+
+    # North arrow
+    ax.annotate(
+        "N",
+        xy=(0.96, 0.88),
+        xytext=(0.96, 0.75),
+        xycoords="axes fraction",
+        textcoords="axes fraction",
+        ha="center",
+        va="center",
+        fontsize=11,
+        fontweight="bold",
+        arrowprops=dict(
+            arrowstyle="-|>",
+            linewidth=1.2
+        )
+    )
+
+    ax.set_title("Study area: Punjab and Haryana, India")
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
+
+    ax.legend(
+        frameon=False,
+        loc="lower left"
+    )
+
+    ax.set_aspect("equal")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    save_figure(
+        fig,
+        "Figure_1_Study_Area_Map"
+    )
 # ============================================================
 # FIGURE 2
 # MULTI-HORIZON F1: RF VS PERSISTENCE
@@ -278,8 +384,263 @@ def figure_2_rf_vs_persistence():
         fig,
         "Figure_2_RF_vs_Persistence_F1"
     )
+    # ============================================================
+# FIGURE 3
+# EMERGING VS CONTINUING FIRE DETECTION
+# ============================================================
 
+def figure_3_emerging_vs_continuing():
 
+    print("\nGenerating Figure 3...")
+
+    transition_file = (
+        V2_DIR
+        / "error_analysis"
+        / "fire_transition_horizon_analysis.csv"
+    )
+
+    if not transition_file.exists():
+        raise FileNotFoundError(transition_file)
+
+    df = pd.read_csv(transition_file)
+
+    # Keep only the two transitions relevant to the paper.
+    df = df[
+        df["transition"].isin([
+            "Normal -> Elevated",
+            "Elevated -> Elevated",
+        ])
+    ].copy()
+
+    # Verify all five horizons are present.
+    expected_horizons = {"+1d", "+2d", "+3d", "+5d", "+7d"}
+
+    if set(df["horizon"]) != expected_horizons:
+        raise ValueError(
+            "Transition artifact does not contain exactly the expected "
+            "five horizons."
+        )
+
+    # RF accuracy is equivalent to transition recall here because:
+    # - Normal -> Elevated rows have actual_elevated = 1
+    # - Elevated -> Elevated rows have actual_elevated = 1
+    #
+    # We calculate recall explicitly from rf_correct / total so the
+    # figure is directly tied to the stored transition counts.
+    df["rf_recall"] = df["rf_correct"] / df["total"]
+
+    emerging = df[
+        df["transition"] == "Normal -> Elevated"
+    ].copy()
+
+    continuing = df[
+        df["transition"] == "Elevated -> Elevated"
+    ].copy()
+
+    horizon_order = {
+        "+1d": 1,
+        "+2d": 2,
+        "+3d": 3,
+        "+5d": 5,
+        "+7d": 7,
+    }
+
+    emerging["horizon_num"] = emerging["horizon"].map(horizon_order)
+    continuing["horizon_num"] = continuing["horizon"].map(horizon_order)
+
+    emerging = emerging.sort_values("horizon_num")
+    continuing = continuing.sort_values("horizon_num")
+
+    print("\nFigure 3 source values:")
+
+    for h in horizon_order:
+        e = emerging[emerging["horizon"] == h].iloc[0]
+        c = continuing[continuing["horizon"] == h].iloc[0]
+
+        print(
+            f"{h}: "
+            f"N->E recall={e['rf_recall']:.4f}, "
+            f"E->E recall={c['rf_recall']:.4f}"
+        )
+
+    fig, ax = plt.subplots(
+        figsize=(7.2, 4.6)
+    )
+
+    x = range(len(HORIZONS))
+
+    ax.plot(
+        x,
+        emerging["rf_recall"],
+        marker="o",
+        linewidth=2.2,
+        markersize=5.5,
+        label="Normal → Elevated",
+    )
+
+    ax.plot(
+        x,
+        continuing["rf_recall"],
+        marker="s",
+        linewidth=2.2,
+        markersize=5.5,
+        label="Elevated → Elevated",
+    )
+
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(
+        [
+            f"+{h} day" if h == 1 else f"+{h} days"
+            for h in HORIZONS
+        ]
+    )
+
+    ax.set_xlabel("Forecast horizon")
+    ax.set_ylabel("Recall")
+
+    ax.set_ylim(0.30, 1.02)
+
+    ax.set_title(
+        "Detection of emerging and continuing elevated-fire episodes"
+    )
+
+    ax.grid(
+        True,
+        axis="y",
+        alpha=0.25
+    )
+
+    ax.legend(
+        frameon=False,
+        loc="lower left"
+    )
+
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    save_figure(
+        fig,
+        "Figure_3_Emerging_vs_Continuing_Recall"
+    )
+
+# ============================================================
+# FIGURE 4
+# +1-DAY RANDOM FOREST CONFUSION MATRIX
+# ============================================================
+
+def figure_4_plus1_confusion_matrix():
+
+    print("\nGenerating Figure 4...")
+
+    prediction_file = (
+        V2_DIR
+        / "error_analysis"
+        / "rf_2025_error_predictions.csv"
+    )
+
+    if not prediction_file.exists():
+        raise FileNotFoundError(prediction_file)
+
+    df = pd.read_csv(prediction_file)
+
+    # Use only the +1-day forecast horizon.
+    df = df[df["horizon"] == "+1d"].copy()
+
+    if df.empty:
+        raise ValueError("No +1d predictions found.")
+
+    # Make sure the required columns exist.
+    required_columns = {
+        "actual_elevated",
+        "rf_prediction",
+    }
+
+    missing = required_columns - set(df.columns)
+
+    if missing:
+        raise ValueError(
+            f"Missing required columns: {sorted(missing)}"
+        )
+
+    # Convert to integer labels.
+    actual = df["actual_elevated"].astype(int)
+    predicted = df["rf_prediction"].astype(int)
+
+    # Explicitly calculate the four cells.
+    tn = int(((actual == 0) & (predicted == 0)).sum())
+    fp = int(((actual == 0) & (predicted == 1)).sum())
+    fn = int(((actual == 1) & (predicted == 0)).sum())
+    tp = int(((actual == 1) & (predicted == 1)).sum())
+
+    matrix = [
+        [tn, fp],
+        [fn, tp],
+    ]
+
+    print("\nFigure 4 confusion matrix:")
+    print(f"TN = {tn}")
+    print(f"FP = {fp}")
+    print(f"FN = {fn}")
+    print(f"TP = {tp}")
+
+    # --------------------------------------------------------
+    # Plot
+    # --------------------------------------------------------
+
+    fig, ax = plt.subplots(
+        figsize=(5.8, 5.0)
+    )
+
+    image = ax.imshow(matrix)
+
+    ax.set_xticks([0, 1])
+    ax.set_yticks([0, 1])
+
+    ax.set_xticklabels([
+        "Normal",
+        "Elevated",
+    ])
+
+    ax.set_yticklabels([
+        "Normal",
+        "Elevated",
+    ])
+
+    ax.set_xlabel("Predicted class")
+    ax.set_ylabel("Actual class")
+
+    ax.set_title(
+        "Random Forest confusion matrix for +1-day forecasting"
+    )
+
+    # Add counts inside cells.
+    for i in range(2):
+        for j in range(2):
+            ax.text(
+                j,
+                i,
+                f"{matrix[i][j]:,}",
+                ha="center",
+                va="center",
+                fontsize=14,
+                fontweight="bold",
+            )
+
+    # Color scale.
+    fig.colorbar(
+        image,
+        ax=ax,
+        fraction=0.046,
+        pad=0.04,
+        label="Number of predictions",
+    )
+
+    ax.set_aspect("equal")
+
+    save_figure(
+        fig,
+        "Figure_4_Plus1_Confusion_Matrix"
+    )
 # ============================================================
 # MAIN
 # ============================================================
@@ -293,9 +654,13 @@ if __name__ == "__main__":
     print(f"\nProject: {BASE_DIR}")
     print(f"V2 data: {V2_DIR}")
     print(f"Output:  {OUT_DIR}")
-
+    figure_1_study_area()
     figure_2_rf_vs_persistence()
-
+    figure_3_emerging_vs_continuing()
+    figure_4_plus1_confusion_matrix()
+    figure_2_rf_vs_persistence()
+    figure_3_emerging_vs_continuing()
+    figure_4_plus1_confusion_matrix()
     print("\n" + "=" * 70)
     print("FIGURE GENERATION COMPLETE")
     print("=" * 70)
