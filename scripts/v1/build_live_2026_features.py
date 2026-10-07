@@ -1,13 +1,14 @@
 import pandas as pd
+from pathlib import Path
 
 
 # ============================================================
 # STUBBLEAI - LIVE 2026 FIRE FEATURE ENGINE
 # ============================================================
 
-HISTORICAL_FILE = "district_daily_fire_counts.csv"
-LIVE_FILE = "live_district_fire_2026.csv"
-OUTPUT_FILE = "live_2026_fire_features.csv"
+HISTORICAL_FILE = str(Path(__file__).resolve().parents[2] / "data" / "processed" / "v1" / "district_daily_fire_counts.csv")
+LIVE_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_district_fire_2026.csv")
+OUTPUT_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_2026_fire_features.csv")
 
 
 print("=" * 70)

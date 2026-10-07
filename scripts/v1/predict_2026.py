@@ -8,19 +8,19 @@ import pandas as pd
 # ============================================================
 # STUBBLEAI - 2026 LIVE RISK PREDICTION
 # ============================================================
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 MODEL_FILE = BASE_DIR / "model" / "stubbleai_deployment_model.pkl"
 CONFIG_FILE = BASE_DIR / "model" / "stubbleai_deployment_config.json"
 
-FIRE_FEATURE_FILE = BASE_DIR / "live_2026_fire_features.csv"
-WEATHER_FILE = BASE_DIR / "live_weather_2026.csv"
+FIRE_FEATURE_FILE = BASE_DIR / "data" / "live" / "live_2026_fire_features.csv"
+WEATHER_FILE = BASE_DIR / "data" / "live" / "live_weather_2026.csv"
 
 # Historical engineered dataset used only for cold-start priors
-HISTORICAL_FEATURE_FILE = BASE_DIR / "ml_dataset_base.csv"
+HISTORICAL_FEATURE_FILE = BASE_DIR / "data" / "processed" / "v1" / "ml_dataset_base.csv"
 
-OUTPUT_FILE = BASE_DIR / "stubbleai_2026_predictions.csv"
-HISTORY_FILE = BASE_DIR / "stubbleai_2026_prediction_history.csv"
+OUTPUT_FILE = BASE_DIR / "data" / "live" / "stubbleai_2026_predictions.csv"
+HISTORY_FILE = BASE_DIR / "data" / "live" / "stubbleai_2026_prediction_history.csv"
 
 
 

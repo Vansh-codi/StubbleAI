@@ -66,12 +66,12 @@ if not PREDICTION_TRIGGER_KEY:
     )
 
 
-PREDICTIONS_FILE = PROJECT_ROOT / "stubbleai_2026_predictions.csv"
+PREDICTIONS_FILE = PROJECT_ROOT / "data" / "live" / "stubbleai_2026_predictions.csv"
 PREDICTION_HISTORY_FILE = (
-    PROJECT_ROOT / "stubbleai_2026_prediction_history.csv"
+    PROJECT_ROOT / "data" / "live" / "stubbleai_2026_prediction_history.csv"
 )
-PREDICTION_SCRIPT = PROJECT_ROOT / "predict_2026.py"
-TRACKER_FILE = PROJECT_ROOT / "prediction_tracker.csv"
+PREDICTION_SCRIPT = PROJECT_ROOT / "scripts" / "v1" / "predict_2026.py"
+TRACKER_FILE = PROJECT_ROOT / "data" / "live" / "prediction_tracker.csv"
 
 # ============================================================
 # Rate limiting

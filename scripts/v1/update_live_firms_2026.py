@@ -11,15 +11,10 @@ from dotenv import load_dotenv
 # STUBBLEAI - PERSISTENT 2026 FIRMS COLLECTOR
 # ============================================================
 
-BASE_DIR = os.path.dirname(
-    os.path.abspath(__file__)
-)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 load_dotenv(
-    os.path.join(
-        BASE_DIR,
-        ".env"
-    )
+    os.path.join(BASE_DIR, ".env")
 )
 
 MAP_KEY = os.getenv("FIRMS_MAP_KEY")
@@ -34,7 +29,7 @@ SOURCES = [
      "VIIRS_NOAA20_NRT",
 ]
 
-HISTORY_FILE = os.path.join(BASE_DIR, "live_firms_2026_history.csv")
+HISTORY_FILE = os.path.join(BASE_DIR, "data", "live", "live_firms_2026_history.csv")
 SEASON_START = date(2026, 9, 1)   # earliest date to backfill
 
 today = datetime.now(timezone.utc).date()

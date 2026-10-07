@@ -7,11 +7,11 @@ import pandas as pd
 # STUBBLEAI - PREDICTION TRACKER
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-PREDICTION_FILE = BASE_DIR / "stubbleai_2026_prediction_history.csv"
-TRACKER_FILE = BASE_DIR / "prediction_tracker.csv"
-ACTUAL_FIRE_FILE = BASE_DIR / "live_district_fire_2026.csv"
+PREDICTION_FILE = BASE_DIR / "data" / "live" / "stubbleai_2026_prediction_history.csv"
+TRACKER_FILE = BASE_DIR / "data" / "live" / "prediction_tracker.csv"
+ACTUAL_FIRE_FILE = BASE_DIR / "data" / "live" / "live_district_fire_2026.csv"
 
 
 print("=" * 70)

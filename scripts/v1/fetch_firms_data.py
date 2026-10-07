@@ -2,7 +2,7 @@ import os
 import time
 from datetime import date, timedelta
 from io import StringIO
-
+from pathlib import Path
 import pandas as pd
 import requests
 from dotenv import load_dotenv
@@ -10,14 +10,10 @@ from dotenv import load_dotenv
 # ============================================================
 # STUBBLEAI — NASA FIRMS DATA FETCHER
 # ============================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-PROJECT_ROOT = os.path.dirname(
-    os.path.abspath(__file__)
-)
 
-load_dotenv(
-    os.path.join(PROJECT_ROOT, ".env")
-)
+load_dotenv(PROJECT_ROOT / ".env")
 
 MAP_KEY = os.getenv("FIRMS_MAP_KEY")
 
@@ -260,8 +256,12 @@ def main():
     # --------------------------------------------------------
 
     output_file = (
-        "firms_punjab_haryana_2023_2025.csv"
-    )
+    PROJECT_ROOT
+    / "data"
+    / "raw"
+    / "firms"
+    / "firms_punjab_haryana_2023_2025.csv"
+)
 
     combined.to_csv(
         output_file,

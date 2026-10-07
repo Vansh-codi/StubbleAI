@@ -64,7 +64,8 @@ from lightgbm import LGBMClassifier
 
 BASE_DIR = Path(__file__).resolve().parent
 
-ML_FILE = BASE_DIR / "ml_dataset_v2.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+ML_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 
 OUTPUT_DIR = BASE_DIR / "research" / "v2" / "calibration"
 

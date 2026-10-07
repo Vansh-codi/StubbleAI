@@ -4,13 +4,13 @@ import numpy as np
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-ML_DATASET = ROOT / "ml_dataset_v2.csv"
-FIRE_PANEL = ROOT / "district_daily_fire_panel_v2.csv"
-GIS_FILE = ROOT / "districts_punjab_haryana.geojson"
+ML_DATASET = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
+FIRE_PANEL = PROJECT_ROOT / "data" / "processed" / "v2" / "district_daily_fire_panel_v2.csv"
+GIS_FILE = PROJECT_ROOT / "data" / "processed" / "v1" / "districts_punjab_haryana.geojson"
 
-OUT_DIR = ROOT / "research" / "v2" / "v2_3" / "spatial"
+OUT_DIR = PROJECT_ROOT / "research" / "v2" / "v2_3" / "spatial"
 
 OUTPUT_FILE = OUT_DIR / "ml_dataset_v2_3_spatial.csv"
 GRAPH_FILE = OUT_DIR / "district_adjacency.csv"

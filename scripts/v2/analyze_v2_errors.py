@@ -22,7 +22,8 @@ from sklearn.metrics import (
 # STUBBLEAI V2.2 - 2025 RF ERROR RECONSTRUCTION
 # ============================================================
 
-DATA_PATH = Path("ml_dataset_v2.csv")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 OUTPUT_DIR = Path("research/v2/error_analysis")
 
 RANDOM_STATE = 42

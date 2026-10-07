@@ -8,10 +8,10 @@ from pathlib import Path
 # CONFIGURATION
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-COORD_FILE = BASE_DIR / "district_coordinates.csv"
-OUTPUT_FILE = BASE_DIR / "district_daily_weather.csv"
+COORD_FILE = BASE_DIR / "data" / "processed" / "v1" / "district_coordinates.csv"
+OUTPUT_FILE = BASE_DIR / "data" / "processed" / "v1" / "district_daily_weather.csv"
 
 START_DATE = "20231001"
 END_DATE = "20251130"

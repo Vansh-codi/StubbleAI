@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 import requests
 import time
@@ -19,7 +21,11 @@ print("=" * 70)
 # 1. Load district coordinates
 # ------------------------------------------------------------
 
-coords = pd.read_csv("district_coordinates.csv")
+PROJECT_ROOT = Path(__file__).resolve().parent
+
+coords = pd.read_csv(
+    PROJECT_ROOT / "data" / "processed" / "v1" / "district_coordinates.csv"
+)
 required_columns = [
     "district",
     "state",

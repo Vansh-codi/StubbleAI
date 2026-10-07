@@ -48,15 +48,18 @@ from sklearn.metrics import (
 # ============================================================
 
 
-BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 V2_FILE = (
-    BASE_DIR
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "v2"
     / "ml_dataset_v2.csv"
 )
 
 SPATIAL_FILE = (
-    BASE_DIR
+    PROJECT_ROOT
     / "research"
     / "v2"
     / "v2_3"
@@ -65,7 +68,7 @@ SPATIAL_FILE = (
 )
 
 SPATIOTEMPORAL_FILE = (
-    BASE_DIR
+    PROJECT_ROOT
     / "research"
     / "v2"
     / "v2_4"
@@ -73,7 +76,7 @@ SPATIOTEMPORAL_FILE = (
 )
 
 OUTPUT_DIR = (
-    BASE_DIR
+    PROJECT_ROOT
     / "research"
     / "v2"
     / "v2_4"

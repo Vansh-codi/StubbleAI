@@ -7,11 +7,11 @@ from pathlib import Path
 # STUBBLEAI V2 - ML DATASET BUILDER
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-FIRE_FILE = BASE_DIR / "district_daily_fire_panel_v2.csv"
-WEATHER_FILE = BASE_DIR / "district_daily_weather.csv"
-OUTPUT_FILE = BASE_DIR / "ml_dataset_v2.csv"
+FIRE_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "district_daily_fire_panel_v2.csv"
+WEATHER_FILE = PROJECT_ROOT / "data" / "processed" / "v1" / "district_daily_weather.csv"
+OUTPUT_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 
 
 # ============================================================

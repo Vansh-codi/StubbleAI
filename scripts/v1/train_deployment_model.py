@@ -2,13 +2,13 @@ import os
 import json
 import joblib
 import pandas as pd
-
+from pathlib import Path
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
-
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # ============================================================
 # STUBBLEAI DEPLOYMENT MODEL
 # Uses all historically labeled data: 2023 + 2024 + 2025
@@ -23,8 +23,13 @@ print("=" * 70)
 # 1. Load historical datasets
 # ------------------------------------------------------------
 
-train_df = pd.read_csv("ml_train.csv")
-test_df = pd.read_csv("ml_test.csv")
+train_df = pd.read_csv(
+    PROJECT_ROOT / "data" / "processed" / "v1" / "ml_train.csv"
+)
+
+test_df = pd.read_csv(
+    PROJECT_ROOT / "data" / "processed" / "v1" / "ml_test.csv"
+)
 
 df = pd.concat([train_df, test_df], ignore_index=True)
 

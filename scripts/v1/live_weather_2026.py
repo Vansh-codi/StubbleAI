@@ -1,14 +1,15 @@
 import time
 import requests
 import pandas as pd
+from pathlib import Path
 
 
 # ============================================================
 # STUBBLEAI - 2026 LIVE WEATHER FORECAST
 # ============================================================
 
-COORD_FILE = "district_coordinates.csv"
-OUTPUT_FILE = "live_weather_2026.csv"
+COORD_FILE = str(Path(__file__).resolve().parents[2] / "data" / "processed" / "v1" / "district_coordinates.csv")
+OUTPUT_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_weather_2026.csv")
 
 BASE_URL = "https://api.open-meteo.com/v1/forecast"
 

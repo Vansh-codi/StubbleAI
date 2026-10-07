@@ -1,3 +1,4 @@
+from pathlib import Path
 import pandas as pd
 import geopandas as gpd
 
@@ -6,9 +7,9 @@ import geopandas as gpd
 # STUBBLEAI - 2026 LIVE DISTRICT FIRE COUNTS
 # ============================================================
 
-FIRMS_FILE = "live_firms_2026_history.csv"
+FIRMS_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_firms_2026_history.csv")
 BOUNDARY_FILE = "districts_punjab_haryana.geojson"
-OUTPUT_FILE = "live_district_fire_2026.csv"
+OUTPUT_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_district_fire_2026.csv")
 
 
 print("=" * 70)

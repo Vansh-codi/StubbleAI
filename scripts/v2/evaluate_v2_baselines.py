@@ -35,7 +35,8 @@ from sklearn.metrics import mean_absolute_error
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
-ML_FILE = BASE_DIR / "ml_dataset_v2.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+ML_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 OUTPUT_FILE = BASE_DIR / "v2_baseline_results.csv"
 THRESHOLD_FILE = BASE_DIR / "v2_baseline_thresholds.json"
 

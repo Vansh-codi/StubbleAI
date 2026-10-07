@@ -15,10 +15,10 @@ from sklearn.metrics import (
 )
 
 
-BASE_DIR = Path(__file__).resolve().parent
-V2_FILE = BASE_DIR / "ml_dataset_v2.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+V2_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 
-OUTPUT_DIR = BASE_DIR / "research" / "v2" / "v2_5"
+OUTPUT_DIR = PROJECT_ROOT / "research" / "v2" / "v2_5"
 PRED_DIR = OUTPUT_DIR / "predictions"
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

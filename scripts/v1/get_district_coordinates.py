@@ -2,10 +2,10 @@ import geopandas as gpd
 import pandas as pd
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-DISTRICT_FILE = BASE_DIR / "districts_punjab_haryana.geojson"
-OUTPUT_FILE = BASE_DIR / "district_coordinates.csv"
+DISTRICT_FILE = BASE_DIR / "data" / "processed" / "v1" / "districts_punjab_haryana.geojson"
+OUTPUT_FILE = BASE_DIR / "data" / "processed" / "v1" / "district_coordinates.csv"
 
 print("Loading district boundaries...")
 

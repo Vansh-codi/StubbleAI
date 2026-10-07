@@ -1,12 +1,12 @@
 import pandas as pd
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-INPUT_FILE = BASE_DIR / "ml_dataset_base.csv"
+INPUT_FILE = BASE_DIR / "data" / "processed" / "v1" / "ml_dataset_base.csv"
 
-TRAIN_FILE = BASE_DIR / "ml_train.csv"
-TEST_FILE = BASE_DIR / "ml_test.csv"
+TRAIN_FILE = BASE_DIR / "data" / "processed" / "v1" / "ml_train.csv"
+TEST_FILE = BASE_DIR / "data" / "processed" / "v1" / "ml_test.csv"
 
 
 # ============================================================

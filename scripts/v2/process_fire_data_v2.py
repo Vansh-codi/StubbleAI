@@ -25,12 +25,12 @@ from pathlib import Path
 # ============================================================
 
 
-BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-FIRMS_FILE = BASE_DIR / "firms_punjab_haryana_2023_2025.csv"
-DISTRICTS_FILE = BASE_DIR / "districts_punjab_haryana.geojson"
+FIRMS_FILE = PROJECT_ROOT / "data" / "raw" / "firms" / "firms_punjab_haryana_2023_2025.csv"
+DISTRICTS_FILE = PROJECT_ROOT / "data" / "processed" / "v1" / "districts_punjab_haryana.geojson"
 
-OUTPUT_FILE = BASE_DIR / "district_daily_fire_panel_v2.csv"
+OUTPUT_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "district_daily_fire_panel_v2.csv"
 
 
 # ------------------------------------------------------------

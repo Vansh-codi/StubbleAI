@@ -33,10 +33,10 @@ warnings.filterwarnings("ignore")
 # - No trend/spatial/interaction/class-weight features
 # ============================================================
 
-ROOT = Path(__file__).resolve().parent
-DATA_PATH = ROOT / "ml_dataset_v2.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 
-OUT_DIR = ROOT / "research" / "v2" / "v2_6"
+OUT_DIR = PROJECT_ROOT / "research" / "v2" / "v2_6"
 RESULTS_DIR = OUT_DIR / "results"
 PRED_DIR = OUT_DIR / "predictions"
 

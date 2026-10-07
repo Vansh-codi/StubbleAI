@@ -198,7 +198,7 @@ def load_persistence_results():
 def figure_1_study_area():
     print("\nGenerating Figure 1...")
 
-    geojson_file = BASE_DIR / "districts_punjab_haryana.geojson"
+    geojson_file = BASE_DIR / "data" / "processed" / "v1" / "districts_punjab_haryana.geojson"
 
     if not geojson_file.exists():
         raise FileNotFoundError(geojson_file)

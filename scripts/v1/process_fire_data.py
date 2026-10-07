@@ -7,13 +7,13 @@ from pathlib import Path
 # CONFIGURATION
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-FIRMS_FILE = BASE_DIR / "firms_punjab_haryana_2023_2025.csv"
-DISTRICT_FILE = BASE_DIR / "districts_punjab_haryana.geojson"
+FIRMS_FILE = BASE_DIR / "data" / "raw" / "firms" / "firms_punjab_haryana_2023_2025.csv"
+DISTRICT_FILE = BASE_DIR / "data" / "processed" / "v1" / "districts_punjab_haryana.geojson"
 
-OUTPUT_FIRE_COUNTS = BASE_DIR / "district_daily_fire_counts.csv"
-OUTPUT_PANEL = BASE_DIR / "district_daily_fire_panel.csv"
+OUTPUT_FIRE_COUNTS = BASE_DIR / "data" / "processed" / "v1" / "district_daily_fire_counts.csv"
+OUTPUT_PANEL = BASE_DIR / "data" / "processed" / "v1" / "district_daily_fire_panel.csv"
 
 
 # ============================================================

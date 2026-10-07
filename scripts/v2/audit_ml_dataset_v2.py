@@ -10,10 +10,10 @@ from sklearn.metrics import accuracy_score, f1_score, mean_absolute_error
 # STUBBLEAI V2 - ML DATASET AUDIT
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-ML_FILE = BASE_DIR / "ml_dataset_v2.csv"
-FIRE_FILE = BASE_DIR / "district_daily_fire_panel_v2.csv"
+ML_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
+FIRE_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "district_daily_fire_panel_v2.csv"
 
 HORIZONS = [1, 2, 3, 5, 7]
 

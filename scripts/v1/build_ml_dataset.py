@@ -2,12 +2,12 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-FIRE_FILE = BASE_DIR / "district_daily_fire_panel.csv"
-WEATHER_FILE = BASE_DIR / "district_daily_weather.csv"
+FIRE_FILE = BASE_DIR / "data" / "processed" / "v1" / "district_daily_fire_panel.csv"
+WEATHER_FILE = BASE_DIR / "data" / "processed" / "v1" / "district_daily_weather.csv"
 
-OUTPUT_FILE = BASE_DIR / "ml_dataset_base.csv"
+OUTPUT_FILE = BASE_DIR / "data" / "processed" / "v1" / "ml_dataset_base.csv"
 
 
 # ============================================================

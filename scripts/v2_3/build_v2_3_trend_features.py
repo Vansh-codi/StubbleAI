@@ -7,11 +7,11 @@ from pathlib import Path
 # STUBBLEAI V2.3 - TREND FEATURE EXPERIMENT
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_FILE = BASE_DIR / "ml_dataset_v2.csv"
+INPUT_FILE = PROJECT_ROOT / "data" / "processed" / "v2" / "ml_dataset_v2.csv"
 OUTPUT_FILE = (
-    BASE_DIR
+    PROJECT_ROOT
     / "research"
     / "v2"
     / "v2_3"
