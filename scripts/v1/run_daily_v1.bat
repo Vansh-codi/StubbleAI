@@ -6,38 +6,38 @@ echo STUBBLEAI - DAILY V1 PIPELINE
 echo %date% %time%
 echo ======================================================================
 
-cd /d "C:\Users\Vansh\Desktop\ai project"
+cd /d "%~dp0..\.."
 
-set "PYTHON=C:\Users\Vansh\Desktop\ai project\.venv\Scripts\python.exe"
+set "PYTHON=%~dp0..\..\.venv\Scripts\python.exe"
 
 echo.
 echo [1/6] Updating FIRMS history...
-"%PYTHON%" update_live_firms_2026.py
+"%PYTHON%" "scripts\v1\update_live_firms_2026.py"
 if %errorlevel% neq 0 goto error
 
 echo.
 echo [2/6] Building district fire counts...
-"%PYTHON%" live_district_fire_2026.py
+"%PYTHON%" "scripts\v1\live_district_fire_2026.py"
 if %errorlevel% neq 0 goto error
 
 echo.
 echo [3/6] Building live fire features...
-"%PYTHON%" build_live_2026_features.py
+"%PYTHON%" "scripts\v1\build_live_2026_features.py"
 if %errorlevel% neq 0 goto error
 
 echo.
 echo [4/6] Fetching weather forecast...
-"%PYTHON%" live_weather_2026.py
+"%PYTHON%" "scripts\v1\live_weather_2026.py"
 if %errorlevel% neq 0 goto error
 
 echo.
 echo [5/6] Running prediction...
-"%PYTHON%" predict_2026.py
+"%PYTHON%" "scripts\v1\predict_2026.py"
 if %errorlevel% neq 0 goto error
 
 echo.
 echo [6/6] Updating prediction tracker...
-"%PYTHON%" prediction_tracker.py
+"%PYTHON%" "scripts\v1\prediction_tracker.py"
 if %errorlevel% neq 0 goto error
 
 echo.

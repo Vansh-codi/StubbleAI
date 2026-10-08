@@ -8,7 +8,13 @@ import geopandas as gpd
 # ============================================================
 
 FIRMS_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_firms_2026_history.csv")
-BOUNDARY_FILE = "districts_punjab_haryana.geojson"
+BOUNDARY_FILE = str(
+    Path(__file__).resolve().parents[2]
+    / "data"
+    / "processed"
+    / "v1"
+    / "districts_punjab_haryana.geojson"
+)
 OUTPUT_FILE = str(Path(__file__).resolve().parents[2] / "data" / "live" / "live_district_fire_2026.csv")
 
 
