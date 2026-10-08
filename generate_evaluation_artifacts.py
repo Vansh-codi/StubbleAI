@@ -22,7 +22,7 @@ from sklearn.metrics import (
 PROJECT_ROOT = Path(__file__).resolve().parent
 
 MODEL_PATH = PROJECT_ROOT / "model" / "stubbleai_final_model.pkl"
-TEST_PATH = PROJECT_ROOT / "ml_test.csv"
+TEST_PATH = PROJECT_ROOT / "data" / "processed" / "v1" / "ml_test.csv"
 
 OUTPUT_DIR = PROJECT_ROOT / "frontend" / "public" / "evaluation"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

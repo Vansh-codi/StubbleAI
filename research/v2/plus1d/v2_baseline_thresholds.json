@@ -1,0 +1,9 @@
+{
+    "horizon": "+1d",
+    "persistence": 0.5,
+    "global_climatology": 0.01,
+    "district_climatology": 0.5544444444444444,
+    "persistence_rule": "fire_count > 2 -> Elevated",
+    "climatology_thresholds_selected_on": "2024 validation \u2014 F1 maximisation",
+    "frozen_for": "2025 test"
+}
