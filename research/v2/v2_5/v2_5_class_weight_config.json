@@ -1,6 +1,6 @@
 {
   "experiment": "V2.5 Cost-Sensitive Emerging-Fire Experiment",
-  "dataset": "C:\\Users\\Vansh\\Desktop\\ai project\\ml_dataset_v2.csv",
+  "dataset": "data/processed/v2/ml_dataset_v2.csv",
   "horizons": [
     1,
     2,

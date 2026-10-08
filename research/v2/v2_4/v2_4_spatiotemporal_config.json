@@ -100,7 +100,7 @@
   "frozen_test": true,
   "v2_reproduction_pass": true,
   "outputs": {
-    "results": "C:\\Users\\Vansh\\Desktop\\ai project\\research\\v2\\v2_4\\v2_4_spatiotemporal_results.csv",
-    "predictions": "C:\\Users\\Vansh\\Desktop\\ai project\\research\\v2\\v2_4\\predictions"
+    "results": "research/v2/v2_4/v2_4_spatiotemporal_results.csv",
+    "predictions": "research/v2/v2_4/predictions"
   }
 }

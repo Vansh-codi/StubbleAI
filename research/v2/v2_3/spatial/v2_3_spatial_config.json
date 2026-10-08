@@ -1,6 +1,6 @@
 {
   "experiment": "V2.3 spatial neighbor context",
-  "dataset": "C:\\Users\\Vansh\\Desktop\\ai project\\research\\v2\\v2_3\\spatial\\ml_dataset_v2_3_spatial.csv",
+  "dataset": "research/v2/v2_3/spatial/ml_dataset_v2_3_spatial.csv",
   "horizons": [
     1,
     2,

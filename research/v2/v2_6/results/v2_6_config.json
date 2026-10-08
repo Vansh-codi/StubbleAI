@@ -1,6 +1,6 @@
 {
   "experiment": "V2.6 Transition-Aware Fire Forecasting",
-  "dataset": "C:\\Users\\Vansh\\Desktop\\ai project\\ml_dataset_v2.csv",
+  "dataset": "data/processed/v2/ml_dataset_v2.csv",
   "train_year": 2023,
   "validation_year": 2024,
   "test_year": 2025,
