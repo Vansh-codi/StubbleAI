@@ -582,24 +582,36 @@ def run_prediction(
             check=False,
         )
 
+
         if result.returncode != 0:
             logger.error(
                 "Prediction pipeline failed with return code %s",
                 result.returncode,
             )
 
+            if result.stdout:
+                logger.error(
+                    "Prediction pipeline stdout:\n%s",
+                    result.stdout[-12000:],
+                )
+
+            if result.stderr:
+                logger.error(
+                    "Prediction pipeline stderr:\n%s",
+                    result.stderr[-12000:],
+                )
+
             raise HTTPException(
                 status_code=500,
                 detail="Prediction pipeline failed. Check backend logs.",
             )
-
         df = load_predictions()
 
         if df.empty:
             raise HTTPException(
                 status_code=500,
                 detail="Prediction pipeline returned no results.",
-            )       
+            )
 
         df = clean_dataframe(df)
 
@@ -628,7 +640,7 @@ def run_prediction(
             len(df),
         )
 
-        
+
 
         return {
             "status": "success",
@@ -752,7 +764,7 @@ def get_tracker(request: Request):
             status_code=500,
             detail="Unable to load prediction tracker.",
         )
-    
+
 
 # ============================================================
 # Dashboard summary
