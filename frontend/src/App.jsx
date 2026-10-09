@@ -1,4 +1,4 @@
-
+﻿
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./App.css";
@@ -585,7 +585,7 @@ setPredictionDates((currentDates) => {
                 title={showMap ? "Show district table" : "Show risk map"}
                 aria-label={showMap ? "Show district table" : "Show risk map"}
               >
-                <span>{showMap ? "Ã¢â€“Â¦" : "Ã¢â€”Å½"}</span>
+                <span>{showMap ? "ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¦" : "ÃƒÂ¢Ã¢â‚¬â€Ã…Â½"}</span>
               </button>
 
               <span className="district-count">
@@ -621,7 +621,7 @@ setPredictionDates((currentDates) => {
                   type="button"
                   onClick={() => setShowMap(false)}
                 >
-                  Ã¢â€“Â¦ Table View
+                  ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¦ Table View
                 </button>
 
               </div>
@@ -646,7 +646,7 @@ setPredictionDates((currentDates) => {
 
                 <div className="search-box">
 
-                  <span>Ã¢Å’â€¢</span>
+                  <span>{"\u{2315}"}</span>
 
                   <input
                     type="text"
@@ -660,7 +660,7 @@ setPredictionDates((currentDates) => {
                       className="clear-search"
                       onClick={() => setSearch("")}
                     >
-                      Ãƒâ€”
+                      {"\u{00D7}"}
                     </button>
                   )}
 
@@ -821,7 +821,7 @@ setPredictionDates((currentDates) => {
                 </p>
 
                 <div className="prediction-mode">
-                  <span>Ã¢â€”Â</span>
+                  <span>ÃƒÂ¢Ã¢â‚¬â€Ã‚Â</span>
                   {selectedDistrict.prediction_mode}
                 </div>
               </div>
@@ -832,7 +832,7 @@ setPredictionDates((currentDates) => {
                 <div className="metric-grid">
                   <div>
                     <span>Temperature</span>
-                    <strong>{selectedDistrict.T2M}Ã‚Â°C</strong>
+                    <strong>{selectedDistrict.T2M}Ãƒâ€šÃ‚Â°C</strong>
                   </div>
 
                   <div>
@@ -931,7 +931,7 @@ setPredictionDates((currentDates) => {
           satellite-derived active-fire activity and weather information.
         </p>
 
-        <span>AI-assisted early warning Ã¢â‚¬Â¢ 2026 operational prototype</span>
+        <span>AI-assisted early warning ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 2026 operational prototype</span>
       </footer>
     </div>
   );
