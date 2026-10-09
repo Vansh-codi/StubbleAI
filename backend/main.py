@@ -538,6 +538,7 @@ def get_district_prediction(request: Request, district: str):
 @limiter.limit("6/hour")
 def run_prediction(
     request: Request,
+    date: str | None = None,
     x_trigger_key: str | None = Header(
         default=None,
         alias="X-Trigger-Key",
@@ -558,6 +559,19 @@ def run_prediction(
 
     verify_trigger_key(x_trigger_key)
 
+    if date is not None:
+        try:
+            parsed_date = pd.to_datetime(
+                date, format="%Y-%m-%d", errors="raise"
+            )
+            if parsed_date.strftime("%Y-%m-%d") != date:
+                raise ValueError("Date must use YYYY-MM-DD.")
+        except (TypeError, ValueError):
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid prediction date. Use YYYY-MM-DD.",
+            )
+
     if not PREDICTION_SCRIPT.exists():
         logger.error(
             "Prediction script not found: %s",
@@ -574,6 +588,7 @@ def run_prediction(
             [
                 sys.executable,
                 str(PREDICTION_SCRIPT),
+                *(['--date', date] if date is not None else [])
             ],
             cwd=str(PROJECT_ROOT),
             capture_output=True,

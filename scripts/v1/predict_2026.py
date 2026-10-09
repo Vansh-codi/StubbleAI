@@ -1,9 +1,19 @@
+﻿import argparse
 import json
 from pathlib import Path
 
 import joblib
 import numpy as np
 import pandas as pd
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--date",
+    type=str,
+    default=None,
+    help="Requested prediction date in YYYY-MM-DD format",
+)
+args = parser.parse_args()
 
 # ============================================================
 # STUBBLEAI - 2026 LIVE RISK PREDICTION
@@ -233,10 +243,29 @@ print(
 # 6. Prediction date = next day
 # ------------------------------------------------------------
 
-prediction_date = (
-    latest_fire_date
-    + pd.Timedelta(days=1)
-)
+next_day = latest_fire_date + pd.Timedelta(days=1)
+
+if args.date:
+    try:
+        requested_date = pd.to_datetime(
+            args.date, format="%Y-%m-%d", errors="raise"
+        )
+    except (ValueError, TypeError) as exc:
+        raise ValueError(
+            "Invalid requested date. Use YYYY-MM-DD."
+        ) from exc
+
+    if requested_date != next_day:
+        raise ValueError(
+            f"Cannot generate a next-day prediction for "
+            f"{requested_date.date()}: latest fire features are "
+            f"from {latest_fire_date.date()}, so the supported "
+            f"prediction date is {next_day.date()}."
+        )
+
+    prediction_date = requested_date
+else:
+    prediction_date = next_day
 in_training_season = prediction_date.month in [10, 11]
 
 if not in_training_season:

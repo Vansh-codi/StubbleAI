@@ -201,6 +201,10 @@ useEffect(() => {
   }, [runningPrediction]);
 
   async function runLivePrediction() {
+    if (selectedDate !== "__TODAY__" && selectedDate !== "__TOMORROW__") {
+      setError("Select Today or Tomorrow before generating a new prediction. Historical dates are view-only.");
+      return;
+    }
     try {
       setRunningPrediction(true);
       setError("");
@@ -219,10 +223,34 @@ const requestConfig = import.meta.env.PROD
       },
     };
 
+const targetOffset = selectedDate === "__TODAY__" ? 0 :
+  selectedDate === "__TOMORROW__" ? 1 : null;
+let requestedDate = null;
+
+if (targetOffset !== null) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(new Date());
+  const dateParts = Object.fromEntries(parts.map(p => [p.type, p.value]));
+  const target = new Date(Date.UTC(
+    Number(dateParts.year), Number(dateParts.month) - 1,
+    Number(dateParts.day) + targetOffset
+  ));
+  requestedDate = [
+    target.getUTCFullYear(),
+    String(target.getUTCMonth() + 1).padStart(2, "0"),
+    String(target.getUTCDate()).padStart(2, "0"),
+  ].join("-");
+}
+
 const response = await axios.post(
   predictionEndpoint,
   {},
-  requestConfig
+  {
+    ...requestConfig,
+    ...(requestedDate ? { params: { date: requestedDate } } : {}),
+  }
 );
 
 //       const response = await axios.post(
@@ -313,7 +341,7 @@ setPredictionDates((currentDates) => {
   if (loading) {
     return (
       <div className="initial-loader">
-        <div className="loader-symbol">🌾</div>
+        <div className="loader-symbol">{ "\u{1F33E}" }</div>
         <div className="loader-ring"></div>
         <h2>StubbleAI</h2>
         <p>Loading risk intelligence...</p>
@@ -443,19 +471,27 @@ setPredictionDates((currentDates) => {
 
           <div className="date">
   <span>
-    {selectedDate === predictionDates[0]
-      ? "LATEST PREDICTION"
-      : "HISTORICAL PREDICTION"}
+    {selectedDate === "__TODAY__" ? "TODAY'S TARGET" : selectedDate === "__TOMORROW__" ? "TOMORROW'S TARGET" : selectedDate === predictionDates[0] ? "LATEST PREDICTION" : "HISTORICAL PREDICTION"}
   </span>
 
   <select
     value={selectedDate}
-    onChange={(event) =>
-      loadPredictionDate(event.target.value)
-    }
-    disabled={loadingDate || predictionDates.length === 0}
+    onChange={(event) => {
+      const value = event.target.value;
+      if (value === "__TODAY__" || value === "__TOMORROW__") {
+        setSelectedDate(value);
+        setError("");
+      } else {
+        loadPredictionDate(value);
+      }
+    }}
+    disabled={loadingDate}
     aria-label="Select prediction date"
   >
+    <option value="__TODAY__">Today (new prediction)</option>
+
+    <option value="__TOMORROW__">Tomorrow (new prediction)</option>
+
     {predictionDates.map((date) => (
       <option
         key={date}
@@ -473,7 +509,7 @@ setPredictionDates((currentDates) => {
             disabled={runningPrediction}
           >
             <span className="run-icon">
-              {runningPrediction ? "◌" : "✦"}
+              {runningPrediction ? "\u{27F3}" : "\u{2728}"}
             </span>
 
             {runningPrediction
@@ -549,7 +585,7 @@ setPredictionDates((currentDates) => {
                 title={showMap ? "Show district table" : "Show risk map"}
                 aria-label={showMap ? "Show district table" : "Show risk map"}
               >
-                <span>{showMap ? "▦" : "◎"}</span>
+                <span>{showMap ? "Ã¢â€“Â¦" : "Ã¢â€”Å½"}</span>
               </button>
 
               <span className="district-count">
@@ -585,7 +621,7 @@ setPredictionDates((currentDates) => {
                   type="button"
                   onClick={() => setShowMap(false)}
                 >
-                  ▦ Table View
+                  Ã¢â€“Â¦ Table View
                 </button>
 
               </div>
@@ -610,7 +646,7 @@ setPredictionDates((currentDates) => {
 
                 <div className="search-box">
 
-                  <span>⌕</span>
+                  <span>Ã¢Å’â€¢</span>
 
                   <input
                     type="text"
@@ -624,7 +660,7 @@ setPredictionDates((currentDates) => {
                       className="clear-search"
                       onClick={() => setSearch("")}
                     >
-                      ×
+                      Ãƒâ€”
                     </button>
                   )}
 
@@ -785,7 +821,7 @@ setPredictionDates((currentDates) => {
                 </p>
 
                 <div className="prediction-mode">
-                  <span>●</span>
+                  <span>Ã¢â€”Â</span>
                   {selectedDistrict.prediction_mode}
                 </div>
               </div>
@@ -796,7 +832,7 @@ setPredictionDates((currentDates) => {
                 <div className="metric-grid">
                   <div>
                     <span>Temperature</span>
-                    <strong>{selectedDistrict.T2M}°C</strong>
+                    <strong>{selectedDistrict.T2M}Ã‚Â°C</strong>
                   </div>
 
                   <div>
@@ -895,7 +931,7 @@ setPredictionDates((currentDates) => {
           satellite-derived active-fire activity and weather information.
         </p>
 
-        <span>AI-assisted early warning • 2026 operational prototype</span>
+        <span>AI-assisted early warning Ã¢â‚¬Â¢ 2026 operational prototype</span>
       </footer>
     </div>
   );
