@@ -585,7 +585,7 @@ setPredictionDates((currentDates) => {
                 title={showMap ? "Show district table" : "Show risk map"}
                 aria-label={showMap ? "Show district table" : "Show risk map"}
               >
-                <span>{showMap ? "ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¦" : "ÃƒÂ¢Ã¢â‚¬â€Ã…Â½"}</span>
+                <span>{showMap ? "\u{25A6}" : "\u{1F5FA}"}</span>
               </button>
 
               <span className="district-count">
@@ -621,7 +621,7 @@ setPredictionDates((currentDates) => {
                   type="button"
                   onClick={() => setShowMap(false)}
                 >
-                  ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¦ Table View
+                  {"\u{25A6}"} Table View
                 </button>
 
               </div>
@@ -821,7 +821,7 @@ setPredictionDates((currentDates) => {
                 </p>
 
                 <div className="prediction-mode">
-                  <span>ÃƒÂ¢Ã¢â‚¬â€Ã‚Â</span>
+                  <span>{"\u{1F4E1}"}</span>
                   {selectedDistrict.prediction_mode}
                 </div>
               </div>
@@ -832,7 +832,7 @@ setPredictionDates((currentDates) => {
                 <div className="metric-grid">
                   <div>
                     <span>Temperature</span>
-                    <strong>{selectedDistrict.T2M}Ãƒâ€šÃ‚Â°C</strong>
+                    <strong>{selectedDistrict.T2M}{"\u{00B0}C"}</strong>
                   </div>
 
                   <div>
@@ -931,10 +931,11 @@ setPredictionDates((currentDates) => {
           satellite-derived active-fire activity and weather information.
         </p>
 
-        <span>AI-assisted early warning ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 2026 operational prototype</span>
+        <span>AI-assisted early warning {"\u{2022}"} 2026 operational prototype</span>
       </footer>
     </div>
   );
 }
 
 export default App;
+
