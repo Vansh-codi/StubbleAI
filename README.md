@@ -1,840 +1,646 @@
 # 🌾 StubbleAI
+### Multi-Horizon Forecasting of Crop-Residue Fire Risk Using Satellite Active-Fire Observations and Weather Data
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-frontend-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-Random%20Forest-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-![Status](https://img.shields.io/badge/status-prototype-orange)
-![SDG](https://img.shields.io/badge/Primary%20SDG-13%20Climate%20Action-2C4A3E)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Multi--Horizon-blueviolet)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=black)
+![Research](https://img.shields.io/badge/Research-Temporal%20Evaluation-blue)
+![SDG 13](https://img.shields.io/badge/SDG%2013-Climate%20Action-2C4A3E)
 
-## AI-Based Crop Residue Burning Risk Prediction & Sustainable Management Assistant
+**StubbleAI is an environmental AI research and decision-support project investigating whether satellite-observed active-fire activity, weather conditions, and temporal patterns can help forecast elevated fire activity across Punjab and Haryana, India.**
 
-**Live demo:** https://stubble-ai.vercel.app
+The project combines a historical data pipeline, temporal feature engineering, machine-learning benchmarks, multi-horizon forecasting experiments, model evaluation, and an interactive district-level dashboard.
 
-StubbleAI is an AI-powered environmental **decision-support and early-warning prototype** for predicting **next-day elevated satellite-derived active-fire activity at district level** across Punjab and Haryana during the October–November crop-residue-burning season.
+**Live demo:** https://stubble-ai.vercel.app  
+**GitHub:** https://github.com/Vansh-codi/StubbleAI
 
-The project combines satellite fire observations, weather information, temporal feature engineering, and a Random Forest classifier, then exposes the resulting risk through a FastAPI backend and React + Leaflet dashboard.
-
-> **Primary SDG:** SDG 13 — Climate Action  
-> **Secondary alignment:** SDG 3 — Good Health and Well-being; SDG 11 — Sustainable Cities and Communities
-
-Developed as part of the **1M1B AI for Sustainability Virtual Internship**, in collaboration with **IBM SkillsBuild & AICTE**.
+> **Research distinction:** The system forecasts satellite-derived active-fire activity. It does not establish that every detection is a confirmed crop-residue-burning event.
 
 ---
 
 ## Table of Contents
 
-- [Problem Statement](#problem-statement)
-- [SDG Alignment](#sdg-alignment)
-- [Target Users](#target-users)
-- [AI Solution](#ai-solution)
-- [Machine Learning](#machine-learning)
-- [Target Definition](#target-definition)
-- [Data Sources](#data-sources)
-- [Feature Engineering](#feature-engineering)
-- [Experimental Design](#experimental-design)
-- [Model Evaluation](#model-evaluation)
-- [Persistence Baseline](#persistence-baseline)
-- [Explainability](#explainability)
-- [Web Dashboard](#web-dashboard)
-- [Screenshots](#screenshots)
-- [System Architecture](#system-architecture)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Historical Evaluation vs 2026 Live Mode](#historical-evaluation-vs-2026-live-mode)
-- [Cold-Start Handling](#cold-start-handling)
-- [Security](#security)
-- [Local Setup](#local-setup)
-- [API](#api)
-- [Reproducibility](#reproducibility)
-- [Responsible AI](#responsible-ai)
-- [Expected Impact](#expected-impact)
-- [Limitations](#limitations)
-- [Future Scope](#future-scope)
-- [Internship Learning & Project Journey](#internship-learning--project-journey)
-- [License](#license)
-- [Author](#author)
+1. [Research Overview](#1-research-overview)
+2. [Problem Statement](#2-problem-statement)
+3. [Project Evolution](#3-project-evolution)
+4. [V2 Research Dataset](#4-v2-research-dataset)
+5. [Forecasting Task](#5-forecasting-task)
+6. [Feature Engineering](#6-feature-engineering)
+7. [Experimental Protocol](#7-experimental-protocol)
+8. [Model Benchmarking](#8-model-benchmarking)
+9. [Research Experiments: V2.3–V2.7](#9-research-experiments-v23v27)
+10. [Error and Transition Analysis](#10-error-and-transition-analysis)
+11. [Dataset Auditing](#11-dataset-auditing)
+12. [Results and Interpretation](#12-results-and-interpretation)
+13. [System Architecture](#13-system-architecture)
+14. [Web Application](#14-web-application)
+15. [Technology Stack](#15-technology-stack)
+16. [Repository Structure](#16-repository-structure)
+17. [Local Setup](#17-local-setup)
+18. [Reproducibility and Research Integrity](#18-reproducibility-and-research-integrity)
+19. [Limitations](#19-limitations)
+20. [V3: Future Research](#20-v3-future-research)
+21. [Sustainability Alignment](#21-sustainability-alignment)
+22. [Author](#22-author)
 
 ---
 
-## Problem Statement
+## 1. Research Overview
 
-> **How might we use AI to identify elevated crop-residue burning risk so that agriculture and environmental stakeholders can act earlier toward sustainable residue management?**
+### Research question
 
-Crop-residue burning is a recurring seasonal problem in northern India. Satellite systems provide valuable observations of active fires, but a predictive district-level signal can help stakeholders identify potentially elevated activity before the following day.
+Can historical satellite-observed active-fire activity, weather variables, seasonality, and district characteristics help predict elevated activity at multiple future time horizons?
 
-StubbleAI therefore focuses on a practical one-day-ahead prediction task rather than attempting to solve the entire crop-residue-burning problem.
+### Study area
 
----
-
-## SDG Alignment
-
-### Primary — SDG 13: Climate Action
-
-The project supports environmental monitoring, climate-awareness, and preventive decision support around seasonal crop-residue burning activity.
-
-### Secondary alignment
-
-- **SDG 3 — Good Health and Well-being:** seasonal biomass-burning activity can contribute to degraded air quality and associated health concerns.
-- **SDG 11 — Sustainable Cities and Communities:** regional fire activity can affect downwind urban areas, including Delhi-NCR.
-
-The prototype does **not** claim a quantified reduction in pollution or emissions; measuring that would require a separate intervention and impact study.
-
----
-
-## Target Users
-
-### Primary
-
-- District Agriculture Officers
-- Farmer-support organizations
-- Local environmental / pollution-control authorities
-
-### Secondary
-
-- Environmental researchers and analysts
-- Urban and regional planners
-
-### Responsible positioning
-
-StubbleAI does not tell farmers when to burn. It is intended as an additional district-level decision-support signal for awareness, preparedness, and sustainable residue-management outreach.
-
----
-
-## AI Solution
-
-```text
-NASA FIRMS observations
-        +
-Weather data / forecast
-        ↓
-District-level aggregation
-        ↓
-Temporal + weather feature engineering
-        ↓
-Random Forest classifier
-        ↓
-Risk probability
-        ↓
-Normal / Elevated
-        ↓
-FastAPI backend
-        ↓
-React + Leaflet dashboard
-```
-
-### Why AI?
-
-The system uses machine learning to identify patterns across recent fire activity, weather, seasonality, and location that can produce a probability-based next-day risk signal at district level.
-
----
-
-## Machine Learning
-
-### Final evaluated model
-
-**Random Forest Classifier**
-
-Configuration:
-
-- 400 trees
-- `class_weight="balanced"`
-- `min_samples_leaf=2`
-- `random_state=42`
-- Decision probability threshold: **0.40**
-
-The 0.40 decision threshold was selected on the **2024 validation set using maximum F1**, then frozen before the 2025 final test.
-
----
-
-## Target Definition
-
-The target is binary:
-
-```text
-Normal:
-next_day_fire_count <= 2
-
-Elevated:
-next_day_fire_count > 2
-```
-
-The target represents elevated **satellite-derived active-fire activity**, not a confirmed count of stubble-burning incidents.
-
----
-
-## Data Sources
-
-### NASA FIRMS
-
-Historical fire observations were processed using VIIRS satellite products.
-
-Historical pipeline:
-
-```text
-149,461 raw detections
-        ↓
-148,196 Oct–Nov detections
-        ↓
-104,259 matched to Punjab/Haryana districts
-```
-
-The evaluated historical period covers:
-
-- 2023
-- 2024
-- 2025
-- October 1 – November 30
+- Punjab and Haryana, India
 - 45 districts
+- October–November seasonal period
+- Historical observations covering 2023, 2024, and 2025
 
-### Important limitation
+### Research focus
 
-FIRMS active-fire detections are a **proxy for fire activity**. A satellite detection is not automatically a confirmed crop-residue-burning event.
+The V2 research programme investigates:
 
-### Historical weather
+- Multi-horizon fire-activity forecasting
+- Temporal feature engineering
+- Chronological model evaluation
+- Supervised learning versus persistence
+- Spatial and temporal model extensions
+- Cost-sensitive and transition-aware approaches
+- District-level error patterns
+- Reproducible dataset and benchmark auditing
 
-NASA POWER daily meteorological data:
+The goal is not merely to produce a high-performing model. It is to determine which approaches provide useful forecasting information under a clearly defined evaluation protocol.
+
+## 2. Problem Statement
+
+Crop-residue burning is an important seasonal environmental concern in northern India. Satellite active-fire observations offer a way to monitor fire activity, but observations alone do not explain how activity may evolve over the following days.
+
+StubbleAI investigates whether machine learning can estimate the probability of elevated future active-fire activity at district level.
+
+Potential applications include environmental monitoring, research, situational awareness, and planning sustainable residue-management outreach.
+
+## 3. Project Evolution
+
+### V1 — Initial system
+
+Established the foundational data-processing pipeline, machine-learning workflow, backend, and district-level dashboard.
+
+### V2 — Research and benchmarking
+
+Introduced a more systematic research workflow with:
+
+- Historical district-level fire and weather data
+- Five forecast horizons
+- Chronological training, validation, and testing
+- Multiple supervised learning models
+- Persistence and climatology baselines
+- Dataset audits
+- Error and transition analysis
+- Versioned experimental investigations
+
+The V2 research state is preserved separately from future model development.
+
+### V2.3–V2.7 — Experimental investigation
+
+Several extensions were investigated to determine whether more complex learning strategies justified replacing or augmenting the reference model. The outcomes and limitations of these experiments are documented below.
+
+### V3 — Next development phase
+
+V3 is intended to build on the evidence from V2. It will be developed separately, with improvements accepted only when supported by reproducible evaluation.
+
+## 4. V2 Research Dataset
+
+| Component | Description |
+|---|---|
+| Study area | Punjab and Haryana |
+| District coverage | 45 districts |
+| Fire-panel dataset | 8,235 rows |
+| Modelling dataset | 5,400 rows × 51 columns |
+| Historical period | October–November, 2023–2025 |
+| Satellite source | NASA FIRMS VIIRS observations |
+| Weather source | NASA POWER historical weather |
+| Forecast horizons | +1, +2, +3, +5, +7 days |
+
+The fire panel contains aggregated district-level fire observations. The modelling dataset combines the fire panel with weather information and derived temporal features.
+
+### Satellite observations
+
+The documented fire-processing workflow uses VIIRS observations from NOAA-20 and Suomi-NPP products.
+
+Fire-related variables include:
+
+- Fire detection counts
+- Fire radiative power (FRP)
+- Detection confidence
+- Day/night indicators
+- Brightness-related variables
+
+### Weather variables
+
+Historical meteorological variables include:
 
 - `T2M` — temperature
 - `RH2M` — relative humidity
 - `WS2M` — wind speed
-- `PRECTOTCORR` — precipitation
+- `PRECTOTCORR` — corrected precipitation
 
-### Live 2026 weather
+The live application may use a different operational weather feed. Historical research results must therefore be distinguished from live prediction outputs.
 
-The operational 2026 pipeline uses **Open-Meteo forecast data** for next-day weather inputs.
+## 5. Forecasting Task
 
-The historical evaluation and live operational pipeline are intentionally documented separately because their weather sources differ.
+V2 evaluates five future horizons:
 
----
+| Horizon | Forecast target |
+|---|---|
+| +1 day | Fire activity one day ahead |
+| +2 days | Fire activity two days ahead |
+| +3 days | Fire activity three days ahead |
+| +5 days | Fire activity five days ahead |
+| +7 days | Fire activity seven days ahead |
 
-## Feature Engineering
+### Binary target
 
-### Fire-history features
+The experimental elevated-activity definition is:
 
-- `fire_lag_1d`
-- `fire_lag_3d`
-- `fire_lag_7d`
-- `fire_mean_3d`
-- `fire_mean_7d`
+```text
+Normal:
+future_fire_count <= 2
 
-### Weather
+Elevated:
+future_fire_count > 2
+```
 
-- `T2M`
-- `RH2M`
-- `WS2M`
-- `PRECTOTCORR`
+The threshold defines the study's classification target. It should not be interpreted as an official fire-danger category or a validated threshold for confirmed stubble burning.
 
-### Seasonality
+## 6. Feature Engineering
 
-- `season_sin`
-- `season_cos`
+The modelling pipeline uses temporal, meteorological, and geographic predictors.
 
-### Location
+### Historical fire features
 
-- District
+- Fire-count lags
+- FRP lags
+- Multiple historical lag intervals
+- Rolling fire-activity summaries based on prior observations
+
+### Weather features
+
+- Temperature
+- Relative humidity
+- Wind speed
+- Precipitation
+
+### Temporal features
+
+- Calendar and seasonal features
+- Sine/cosine representations of seasonality
+
+### Geographic features
+
 - State
+- District
 
-Lag and rolling features use past observations so that future target information is not leaked into the predictors.
+The dataset-building pipeline checks temporal alignment between lagged observations and future targets. Feature and target columns are treated separately to reduce the risk of future-information leakage.
 
----
+## 7. Experimental Protocol
 
-## Experimental Design
-
-A strict temporal split was used instead of a random shuffle:
+The primary evaluation uses chronological data splits.
 
 ```text
-2023
-TRAINING
-2,430 rows
-       ↓
-2024
-VALIDATION
-2,745 rows
-       ↓
-2025
-FINAL TEST
-2,700 rows
+2023                     2024                      2025
+TRAINING  ─────────────> VALIDATION ─────────────> HELD-OUT TEST
+Fit models                Select thresholds         Evaluate models
 ```
 
-Final ML dataset:
+The intended protocol is:
 
-**7,875 rows**
+1. Fit supervised models on the 2023 training data.
+2. Use 2024 validation data for model-threshold selection.
+3. Freeze the selected thresholds before the 2025 test.
+4. Evaluate the final models on the held-out 2025 observations.
+5. Compare supervised approaches against simple baselines.
+6. Conduct additional diagnostic experiments without silently replacing the original benchmark.
 
-The 2025 test season remained unseen during model development and threshold selection.
+The same experimental protocol must be applied consistently when comparing models. Any change to target construction, sample selection, or evaluation rows must be explicitly documented.
 
----
+## 8. Model Benchmarking
 
-## Model Evaluation
+### Supervised models
 
-Models / baselines evaluated:
+The documented V2 benchmark includes:
 
-- Random Forest
-- Logistic Regression
-- XGBoost
-- Persistence baseline
+| Model | Role |
+|---|---|
+| Logistic Regression | Linear classification baseline |
+| Random Forest | Reference supervised model |
+| XGBoost | Gradient-boosted tree model |
+| LightGBM | Gradient-boosted tree model |
 
-The persistence baseline predicts tomorrow's class as today's class.
+### Baseline models
 
-### Final Random Forest — 2025 Test
+**Persistence baseline**
 
-| Metric | Result |
+Carries forward the latest observed fire activity as a prediction of future activity.
+
+**Global climatology**
+
+Uses historical overall activity patterns as a simple reference.
+
+**District climatology**
+
+Uses historical district-level patterns as a reference.
+
+These baselines help determine whether the supervised models add useful information beyond persistence and historical averages.
+
+### Evaluation metrics
+
+The benchmark records metrics including:
+
+- Accuracy
+- Precision
+- Recall
+- F1 score
+- ROC-AUC
+- PR-AUC
+- Confusion-matrix counts
+- MAE for applicable fire-count predictions
+
+Threshold-dependent metrics must be interpreted using the threshold-selection protocol. ROC-AUC and PR-AUC provide complementary information about model ranking.
+
+## 9. Research Experiments: V2.3–V2.7
+
+The following table summarises the experimental history provided for the project. The labels describe the recorded research outcomes; detailed quantitative claims should be taken from the corresponding experiment artifacts.
+
+| Version | Research direction | Recorded outcome |
+|---|---|---|
+| V2.3 Trend | Trend-based extension | Rejected |
+| V2.3 Spatial | Spatial extension | Conditionally accepted as experimental |
+| V2.4 | Spatio-temporal interaction experiment | Rejected |
+| V2.5 | Cost-sensitive learning | Rejected |
+| V2.6 | Transition-aware modelling | Informative, but not accepted as the replacement |
+| V2.7 | XGBoost/LightGBM learner benchmark | Rejected as replacements for the reference model |
+
+### V2.3 — Trend and spatial experiments
+
+The trend experiment was not accepted as an improvement to the reference approach.
+
+The spatial experiment was retained conditionally as an experimental direction, rather than presented as a confirmed superior model.
+
+### V2.4 — Spatio-temporal interaction
+
+This experiment investigated whether a more explicit combination of spatial and temporal information would improve the forecasting approach.
+
+The approach was rejected as a replacement under the recorded evaluation.
+
+### V2.5 — Cost-sensitive learning
+
+This experiment investigated whether changing the learning objective to account for different classification errors would produce a more useful model.
+
+It was not accepted as a replacement. Any future reconsideration should be justified by clearly defined operational costs and evaluation evidence.
+
+### V2.6 — Transition-aware modelling
+
+This experiment investigated changes between activity states, including transitions involving normal and elevated activity.
+
+The analysis was considered informative, but the approach was not accepted as the new reference model.
+
+### V2.7 — Alternative learners
+
+XGBoost and LightGBM were investigated as alternative supervised learners.
+
+They were not accepted as replacements for the reference model under the recorded benchmark decisions.
+
+### Why document rejected experiments?
+
+Research is not only a record of the best-performing model. Documenting unsuccessful experiments helps establish:
+
+- Which approaches were investigated
+- Which methods were not accepted
+- Why a more complex approach should not automatically be preferred
+- What should be tested differently in future research
+
+The experiments should be described as completed only to the extent supported by their recorded scripts, outputs, and reports.
+
+## 10. Error and Transition Analysis
+
+The research record includes a reported collection of 9,000 horizon-level predictions and additional diagnostic investigations.
+
+Documented analysis dimensions include:
+
+- District-level and state-level performance
+- Punjab versus Haryana
+- Early-, middle-, and late-season behaviour
+- Current fire-activity regime
+- Normal-to-elevated transitions
+- Elevated-to-elevated transitions
+- Random Forest versus persistence
+- False-positive and false-negative cases
+
+These diagnostics help investigate where a forecasting model succeeds or fails, rather than relying on a single aggregate metric.
+
+A subgroup difference should not automatically be interpreted as a causal geographic effect. Results also depend on sample size, prevalence, seasonality, and the evaluation design.
+
+## 11. Dataset Auditing
+
+The V2 dataset audit examines several structural and temporal properties.
+
+| Audit area | Purpose |
+|---|---|
+| Lag alignment | Check that lag features refer to the intended prior dates |
+| Target alignment | Check future targets against their intended dates |
+| Leakage checks | Inspect feature/target separation |
+| Temporal boundaries | Examine date and year consistency |
+| Geographic consistency | Check district/state relationships |
+| Temporal coverage | Inspect daily coverage and usable observations |
+| Target distributions | Characterise elevated versus normal target frequency |
+| Persistence calculation | Compute reference baseline metrics |
+
+The documented audit reported a passing result for its defined checks.
+
+This is evidence about the checks performed, not proof that every possible leakage risk has been ruled out or that all benchmark metrics have been independently reproduced.
+
+## 12. Results and Interpretation
+
+Random Forest is the reference supervised model in the documented V2 benchmark. The project also records alternative learners, simple baselines, thresholds, confusion matrices, and horizon-specific evaluation metrics.
+
+The following reported Random Forest F1 scores are available in the frozen benchmark summary:
+
+| Horizon | Random Forest F1 |
 |---|---:|
-| Accuracy | **81.48%** |
-| Balanced Accuracy | **79.35%** |
-| Precision | **66.78%** |
-| Recall | **74.15%** |
-| F1 Score | **70.27%** |
-| ROC-AUC | **0.8779** |
-| PR-AUC | **0.7926** |
+| +1 day | 0.7754 |
+| +2 days | 0.7513 |
+| +3 days | 0.7305 |
+| +5 days | 0.7303 |
+| +7 days | 0.7085 |
 
-### Confusion matrix
+These are reported benchmark values and should be checked against the final per-horizon artifacts before publication.
 
-```text
-                    Predicted
-                 Normal  Elevated
+### Important baseline-verification note
 
-Actual Normal      1609     294
-Actual Elevated     206     591
-```
+The research record also contains persistence results that differ from those produced by a later dataset-audit calculation. The final README and paper should use a single reconciled set of baseline results calculated on the same test rows and targets.
 
-The model correctly identified **591 of 797 actual elevated-activity cases** in the 2025 test season.
+Until that reconciliation is complete, the README does not claim that Random Forest definitively outperforms persistence at every horizon.
 
----
+The research objective is to establish whether machine learning adds reproducible predictive value, not to maximise the apparent performance of one model.
 
-## Persistence Baseline
-
-The persistence baseline performed strongly because fire activity exhibits substantial temporal persistence.
-
-| Metric | Random Forest | Persistence |
-|---|---:|---:|
-| Accuracy | 81.48% | 83.89% |
-| Balanced Accuracy | 79.35% | 80.59% |
-| F1 | 70.27% | 72.66% |
-
-The Random Forest did **not** outperform persistence on aggregate accuracy or F1.
-
-However, the Random Forest correctly identified **81 elevated cases that persistence missed**, providing complementary probabilistic information for some rising-activity cases.
-
-This comparison is intentionally reported rather than hidden.
-
----
-
-## Explainability
-
-Important model features included:
-
-1. `fire_mean_7d`
-2. `fire_mean_3d`
-3. `fire_lag_1d`
-4. `fire_lag_3d`
-5. `season_cos`
-6. `fire_lag_7d`
-7. `T2M`
-
-Recent fire-history features dominate feature importance.
-
-> Feature importance describes model association; it does not establish causation for an individual prediction.
-
----
-
-## Web Dashboard
-
-The working prototype provides:
-
-- Live prediction date
-- Total monitored districts
-- Normal / Elevated counts
-- Highest-risk district
-- District search
-- Risk filters
-- Risk probability
-- District analysis
-- Interactive district risk map
-- Map-based district selection
-- Model performance information
-- 2026 prediction tracker
-
-### Map
-
-The Leaflet map visualizes model-estimated probability using:
+## 13. System Architecture
 
 ```text
-<20%       Low
-20–40%     Moderate
-40–60%     Elevated
->60%       High
+NASA FIRMS Satellite Observations
+                +
+     Historical Weather Data
+                |
+                v
+        Data Processing
+                |
+                v
+   District-Level Fire Panel
+                |
+                v
+      Feature Engineering
+                |
+                v
+  Multi-Horizon ML Experiments
+                |
+                v
+      Evaluation and Auditing
+                |
+                v
+      Prediction Interface
+                |
+                v
+       FastAPI + React
+                |
+                v
+   District Map and Analysis
 ```
 
-The map is for situational awareness and does not represent confirmed burning events.
+The historical research pipeline and operational dashboard serve different purposes. The research pipeline supports controlled evaluation; the application presents predictions and supporting information using its configured data sources.
 
----
+## 14. Web Application
 
-## Screenshots
+The existing prototype provides district-level environmental information through an interactive dashboard.
 
-### Dashboard overview — live deployment, 45 districts monitored
+Documented interface features include:
 
-![StubbleAI Dashboard Overview](docs/screenshots/dashboard-overview.png)
+- District-level prediction summaries
+- Search and filtering
+- Risk probability displays
+- Interactive district map
+- District-level analysis
+- Weather and recent fire-activity information
+- Prediction tracking and model-performance information
 
-The deployed dashboard at [stubble-ai.vercel.app](https://stubble-ai.vercel.app/), showing total districts, Normal/Elevated counts, highest-risk district, and the interactive district risk map with a live tooltip.
+The live application should be understood as a decision-support prototype, not as proof of real-world forecasting accuracy.
 
-### Risk overview table — real district-level predictions
+### Screenshots
 
-![StubbleAI Risk Overview Table](docs/screenshots/risk-table.png)
-
-Searchable, sortable risk table across all 45 districts, ranked by predicted risk probability.
-
-### District analysis — model inputs and reasoning
-
-![StubbleAI District Analysis](docs/screenshots/district-analysis.png)
-
-Drill-down view for a single district showing the predicted probability alongside the weather inputs and recent fire-activity features that fed the model.
-
-### Model validation — 2025 unseen test set
-
-![StubbleAI Model Validation](docs/screenshots/model-validation.png)
-
-Confusion matrix and feature importance for the frozen Random Forest, evaluated once on the unseen 2025 season.
-
----
-
-## System Architecture
+Add screenshots from the current repository if available:
 
 ```text
-NASA FIRMS ──────────────┐
-                         │
-                         ↓
-                  Data Processing
-                         ↑
-Weather ────────────────┘
-                         ↓
-                  Feature Engineering
-                         ↓
-                    Random Forest
-                         ↓
-                   Risk Probability
-                         ↓
-                      FastAPI
-                         ↓
-                React Web Dashboard
-                     ↙        ↘
-              District Map   Analysis
-                         ↓
-                  Prediction Tracker
+docs/screenshots/dashboard-overview.png
+docs/screenshots/risk-table.png
+docs/screenshots/district-analysis.png
 ```
 
----
+Example:
 
-## Technology Stack
+```markdown
+![StubbleAI dashboard](docs/screenshots/dashboard-overview.png)
+```
 
-### Data / ML
+## 15. Technology Stack
 
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Joblib
-- Random Forest
-- XGBoost
-- Logistic Regression
+| Area | Technologies |
+|---|---|
+| Programming | Python, JavaScript |
+| Data processing | Pandas, NumPy |
+| Machine learning | scikit-learn, XGBoost, LightGBM |
+| Backend | FastAPI, Uvicorn |
+| Frontend | React, Vite |
+| Mapping | Leaflet, React Leaflet |
+| Satellite data | NASA FIRMS VIIRS |
+| Historical weather | NASA POWER |
+| Operational weather | Open-Meteo |
+| Model persistence | Joblib |
+| Version control | Git, GitHub |
+| Deployment | Vercel and configured backend hosting |
 
-### Backend
+## 16. Repository Structure
 
-- FastAPI
-- Uvicorn
-- Python prediction pipeline
-
-### Frontend
-
-- React
-- Vite
-- Axios
-- Leaflet
-- React Leaflet
-- CSS
-
-### Data / APIs
-
-- NASA FIRMS
-- NASA POWER
-- Open-Meteo
-- District boundary GeoJSON
-
-### Development
-
-- Git
-- GitHub
-- Visual Studio Code
-
----
-
-## Project Structure
+The following is a representative structure. Update it to match the actual repository before publication.
 
 ```text
 StubbleAI/
-│
 ├── backend/
-│   └── main.py
-│
 ├── frontend/
-│   ├── public/
-│   │   └── districts_punjab_haryana.geojson
-│   ├── src/
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── ...
-│   ├── package.json
-│   └── ...
-│
 ├── model/
-│   ├── stubbleai_final_model.pkl
-│   ├── stubbleai_deployment_model.pkl
-│   ├── stubbleai_final_results.json
-│   └── stubbleai_threshold.json
-│
+├── scripts/
+│   └── v2/
+│       ├── build_ml_dataset_v2.py
+│       ├── train_v2_models.py
+│       ├── evaluate_v2_baselines.py
+│       └── audit_ml_dataset_v2.py
+├── research/
+│   └── v2/
+│       ├── BENCHMARK_SUMMARY.md
+│       └── ...
 ├── docs/
 │   └── screenshots/
-│
-├── process_fire_data.py
-├── download_weather.py
-├── build_ml_dataset.py
-├── prepare_ml.py
-├── predict_2026.py
-├── update_live_firms_2026.py
-├── live_district_fire_2026.py
-├── build_live_2026_features.py
-├── live_weather_2026.py
-├── prediction_tracker.py
-│
-├── ml_dataset_base.csv
-├── live_district_fire_2026.csv
-├── live_weather_2026.csv
-├── live_2026_fire_features.csv
-├── stubbleai_2026_predictions.csv
-├── prediction_tracker.csv
-│
+├── requirements.txt
 ├── .env.example
 ├── .gitignore
 └── README.md
 ```
 
-> File names can vary slightly depending on the final repository cleanup. Keep the README synchronized with the actual repository before publishing.
+The research scripts, frozen benchmark artifacts, and future V3 development should remain distinguishable.
 
----
+### Recorded experimental checkpoints
 
-## Historical Evaluation vs 2026 Live Mode
+The research history provided includes these Git checkpoints:
 
-These are intentionally separate.
+| Commit | Experiment |
+|---|---|
+| `57855c9` | V2.7 learner benchmark |
+| `82bf4ae` | V2.6 transition diagnostics |
+| `2d67f84` | V2.5 cost-sensitive experiment |
+| `92bc80e` | V2.4 spatio-temporal interaction experiment |
 
-### Historical research evaluation
+These abbreviated hashes are reproduced from the supplied project record. Verify them against the repository before using them as permanent links.
 
-```text
-2023 → Training
-2024 → Validation / threshold selection
-2025 → Final unseen test
-```
+## 17. Local Setup
 
-The reported metrics belong only to this experiment.
+### Prerequisites
 
-### 2026 operational mode
+- Python 3.10 or a compatible supported Python version
+- Node.js and npm
+- Git
 
-```text
-FIRMS NRT observations
-        +
-Open-Meteo forecast
-        ↓
-Live feature generation
-        ↓
-Deployment model
-        ↓
-Next-day district risk
-```
-
-No 2026 accuracy is claimed because future ground-truth observations are not available at prediction time.
-
-### FIRMS processing distinction
-
-The historical evaluation uses processed historical FIRMS data, while the live 2026 pipeline uses near-real-time FIRMS observations. NASA's NRT stream can later differ from the finalized historical product after processing/reprocessing.
-
----
-
-## Cold-Start Handling
-
-The model depends on recent fire-history features.
-
-When sufficient live history is unavailable during the supported operating season, the implemented pipeline can use its historical seasonal fallback rather than treating missing observations as real zeros.
-
-This prevents unsupported predictions from being presented as measured live history.
-
----
-
-## Security
-
-### Environment variables
-
-Private API credentials belong in `.env`:
-
-```env
-FIRMS_MAP_KEY=your_private_key
-PREDICTION_TRIGGER_KEY=your_private_trigger_key
-```
-
-Never commit the real `.env`.
-
-Use `.env.example` as the public template.
-
-### Important
-
-- Never put `FIRMS_MAP_KEY` or `PREDICTION_TRIGGER_KEY` in frontend React/Vite code.
-- Never use a `VITE_*` variable for a private API key.
-- The `/api/run-prediction` endpoint is protected with an `X-Trigger-Key` and rate-limited.
-- The production trigger key is stored server-side in the hosting provider's environment variables and is not exposed to the browser.
-- Store production secrets in the hosting provider's secret manager.
-- Rotate a key immediately if it is accidentally exposed.
-- Do not log credentials or full environment-variable contents.
-
-### Model artifact security
-
-The Random Forest is stored as a trusted Joblib/Pickle artifact.
-
-Pickle-based model files can execute code during deserialization, so:
-
-- Only load model files produced by this project or another trusted source.
-- Do not load arbitrary `.pkl` files from users or the internet.
-- Keep the model artifact under controlled repository/deployment access.
-- The API should return prediction values, not raw model objects.
-- For production, consider artifact checksums/signing and a safer serialized model format where practical.
-
-See [`SECURITY.md`](SECURITY.md) for the repository security checklist.
-
----
-
-## Local Setup
-
-### 1. Clone
+### Clone the repository
 
 ```bash
 git clone https://github.com/Vansh-codi/StubbleAI.git
 cd StubbleAI
 ```
 
-### 2. Python environment
+### Create the Python environment
 
-Windows:
+Windows PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
-
-If PowerShell activation is blocked:
-
-```powershell
-.\.venv\Scripts\python.exe
-```
-
-### 3. Install backend dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure secrets
+### Configure environment variables
 
-Copy `.env.example` to `.env` and add the private NASA FIRMS key and prediction trigger key.
+Use `.env.example` to identify the required environment variables. Create a local `.env` file only for credentials needed by the selected components.
 
-### 5. Start backend
+Never commit production secrets or private API keys.
 
-```bash
+### Start the backend
+
+If the backend entry point remains `backend/main.py`:
+
+```powershell
 cd backend
 uvicorn main:app --reload
 ```
 
-API:
+Default local API address:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-### 6. Start frontend
+### Start the frontend
 
-In another terminal:
+Open another terminal:
 
-```bash
+```powershell
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend:
+The Vite development server commonly uses:
 
 ```text
 http://localhost:5173
 ```
 
----
+Confirm the actual paths, dependencies, and environment-variable requirements in the current repository.
 
-## API
+## 18. Reproducibility and Research Integrity
 
-| Endpoint | Method | Purpose |
-|---|---|---|
-| `/` | GET | API status |
-| `/api/health` | GET | Health check |
-| `/api/predictions` | GET | All district predictions |
-| `/api/predictions/{district}` | GET | District prediction |
-| `/api/summary` | GET | Dashboard summary |
-| `/api/run-prediction` | POST | Run live prediction pipeline (requires `X-Trigger-Key` header) |
+The project follows a research-first principle: model claims should be traceable to the data, code, evaluation protocol, and recorded outputs that support them.
 
-Example:
+Key practices include:
 
-```text
-GET /api/predictions/Amritsar
-```
+- Chronological training, validation, and test splits
+- Validation-based threshold selection
+- Separation of future targets from predictors
+- Explicit baseline comparisons
+- Dataset alignment and consistency checks
+- Documentation of experimental alternatives
+- Preservation of the V2 research state
+- Separate development and evaluation of future versions
 
----
+A model should not be declared superior solely because its result is numerically higher in one experiment. Comparisons must use consistent targets, evaluation rows, and metrics.
 
-## Reproducibility
+## 19. Limitations
 
-The research evaluation is deliberately separated from deployment.
+- Satellite detections are proxies for fire activity, not confirmed crop-residue-burning events.
+- The geographic scope is limited to Punjab and Haryana.
+- The study focuses on October–November.
+- Binary classification simplifies a more complex environmental process.
+- District-level aggregation can hide local variation.
+- Historical and operational weather sources may differ.
+- Persistence can be a strong baseline.
+- Audit results cover only the checks implemented.
+- Historical test performance does not guarantee future operational performance.
+- Pollution reduction, emissions impact, and health benefits have not been established by an intervention study.
 
-```text
-2023 → TRAIN
-2024 → VALIDATE
-2025 → TEST
-```
+## 20. V3: Future Research
 
-The reported 2025 test metrics are frozen after evaluation.
+V3 will build on the V2 experimental record without overwriting the frozen research baseline.
 
-For future operational inference, a separate deployment model may use the available historical data after the research evaluation has been finalized. This prevents the reported test result from being contaminated by future operational data.
+Planned directions include:
 
----
+1. Improved temporal modelling and feature engineering.
+2. Further evaluation of spatial and spatio-temporal information.
+3. Better analysis of activity-state transitions.
+4. Probability calibration and uncertainty assessment.
+5. Robustness evaluation across districts, seasons, and forecast horizons.
+6. Consistent comparisons against persistence and climatology baselines.
+7. Evaluation using only information available at the intended prediction time.
+8. Monitoring predictions against subsequently available observations.
 
-## Responsible AI
+These are future research directions, not completed features or guaranteed improvements. A V3 method should replace the reference model only if its results justify that decision under a reproducible evaluation protocol.
 
-### Transparency
+## 21. Sustainability Alignment
 
-The dashboard exposes risk probability, decision threshold, supporting information, and evaluation metrics.
+**Primary alignment: SDG 13 — Climate Action**
 
-### Fairness
+StubbleAI investigates environmental monitoring and decision support around seasonal active-fire activity.
 
-District aggregation can hide sub-district differences. The system must not be used to assign blame or penalties to individual farmers or communities.
+Related areas include:
 
-### Privacy
+- **SDG 3 — Good Health and Well-being:** relevance to environmental and air-quality research.
+- **SDG 11 — Sustainable Cities and Communities:** regional environmental monitoring and preparedness.
 
-The prototype uses district-level environmental data and does not require personally identifiable farmer information.
+The project does not claim a measured reduction in pollution, emissions, or health impacts. These outcomes require separate evidence and impact evaluation.
 
-### Ethics
 
-The system is intended for awareness, preparedness, and decision support — not autonomous enforcement.
-
-### Data limitations
-
-FIRMS detections are satellite-derived active-fire proxies and may include sources other than crop-residue burning.
-
-### Human oversight
-
-Predictions should be considered alongside local knowledge and other official information.
-
----
-
-## Expected Impact
-
-StubbleAI aims to support:
-
-1. Earlier awareness of potentially elevated fire-activity days.
-2. Better targeting of district-level outreach.
-3. Sustainable residue-management efforts.
-4. Environmental preparedness and monitoring.
-5. Reusable AI-based sustainability decision-support workflows.
-
-No specific pollution-reduction percentage is claimed because this prototype has not conducted an intervention impact study.
-
----
-
-## Limitations
-
-- FIRMS observations are proxies, not confirmed stubble-burning events.
-- Geographic scope is currently Punjab + Haryana.
-- Seasonal scope is October–November.
-- Binary classification reduces risk granularity.
-- Historical and live data streams have different processing characteristics.
-- Historical weather and live forecast weather come from different sources.
-- Random Forest does not outperform persistence on aggregate 2025 accuracy or F1.
-- District-level aggregation can mask local variation.
-- 2026 predictive accuracy cannot be established until future observations are available.
-
----
-
-## Future Scope
-
-- Expand to additional crop-residue-burning states.
-- Incorporate satellite imagery as a complementary signal.
-- Use a consistent historical/forecast weather source for stronger operational evaluation.
-- Add authorized SMS/WhatsApp alerts.
-- Improve spatial and temporal resolution.
-- Evaluate advanced spatiotemporal models.
-- Conduct intervention studies to quantify environmental impact.
-- Continue validating 2026 predictions against subsequent observations.
-
----
-
-## Internship Learning & Project Journey
-
-This project demonstrates the internship learning journey:
-
-### Problem framing
-
-Converted a sustainability challenge into a measurable AI prediction problem.
-
-### Data and AI
-
-Applied data preparation, feature engineering, temporal validation, classification, and evaluation.
-
-### Responsible AI
-
-Considered transparency, fairness, privacy, environmental-data limitations, and human oversight.
-
-### Deployment
-
-Connected the ML pipeline to a FastAPI backend and React dashboard, deployed live.
-
-### Sustainability
-
-Applied AI as a decision-support tool for an environmental problem rather than building technology without a defined impact objective.
-
----
-
-## License
-
-This repository is an educational/research prototype developed for the 1M1B AI for Sustainability Virtual Internship.
-
-Before selecting an open-source license, verify the licensing and attribution requirements of external datasets, boundary files, APIs, and other third-party resources used by the project.
-
----
-
-## Author
-
-**Vansh Jain**
-
-B.Tech — Computer Science & Engineering (AI & ML)
-
-**StubbleAI — AI-Based Crop Residue Burning Risk Prediction & Sustainable Management Assistant**
-
-1M1B AI for Sustainability Virtual Internship  
-In collaboration with IBM SkillsBuild & AICTE
-
----
 
 ## Disclaimer
 
-StubbleAI is an educational and research-oriented decision-support prototype.
-
-Its predictions represent model-estimated probabilities of elevated **satellite-derived active-fire activity**, not confirmed crop-residue-burning events.
+StubbleAI is an educational and research-oriented decision-support prototype. Its predictions estimate satellite-derived active-fire activity and do not independently confirm crop-residue burning.
 
 The system should not be used as the sole basis for enforcement, penalties, or decisions affecting individuals or communities.
 
----
-
-## Project Philosophy
-
-> **Observe the problem → understand the data → apply AI responsibly → evaluate honestly → build for sustainability.**
+> **Project philosophy:** Investigate rigorously. Compare fairly. Document failures. Preserve evidence. Improve only when results justify it.
