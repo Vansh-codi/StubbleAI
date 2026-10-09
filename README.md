@@ -436,22 +436,6 @@ Documented interface features include:
 
 The live application should be understood as a decision-support prototype, not as proof of real-world forecasting accuracy.
 
-### Screenshots
-
-Add screenshots from the current repository if available:
-
-```text
-docs/screenshots/dashboard-overview.png
-docs/screenshots/risk-table.png
-docs/screenshots/district-analysis.png
-```
-
-Example:
-
-```markdown
-![StubbleAI dashboard](docs/screenshots/dashboard-overview.png)
-```
-
 ## 15. Technology Stack
 
 | Area | Technologies |
