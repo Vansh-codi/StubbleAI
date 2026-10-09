@@ -100,195 +100,162 @@ print("Districts loaded:", len(districts))
 # 2. Download next-day weather
 # ------------------------------------------------------------
 
+
 all_weather = []
 failures = []
 
-for i, row in districts.iterrows():
+BATCH_SIZE = 5
 
-    district = row["district"]
-    state = row["state"]
+required_forecast_fields = [
+    "time",
+    "temperature_2m_mean",
+    "relative_humidity_2m_mean",
+    "wind_speed_10m_mean",
+    "precipitation_sum",
+]
 
-    latitude = row["latitude"]
-    longitude = row["longitude"]
+weather_features = ["T2M", "RH2M", "WS2M", "PRECTOTCORR"]
+
+for start_idx in range(0, len(districts), BATCH_SIZE):
+    batch = districts.iloc[start_idx:start_idx + BATCH_SIZE]
+    batch_no = start_idx // BATCH_SIZE + 1
+    total_batches = (len(districts) + BATCH_SIZE - 1) // BATCH_SIZE
 
     print(
-        f"[{i + 1:02d}/{len(districts):02d}] "
-        f"{district}, {state}"
+        f"\nBatch {batch_no}/{total_batches}: "
+        + ", ".join(
+            f"{r.district}, {r.state}"
+            for r in batch.itertuples()
+        ),
+        flush=True,
     )
 
     params = {
-        "latitude": latitude,
-        "longitude": longitude,
-
+        "latitude": ",".join(map(str, batch["latitude"])),
+        "longitude": ",".join(map(str, batch["longitude"])),
         "daily": (
             "temperature_2m_mean,"
             "relative_humidity_2m_mean,"
             "wind_speed_10m_mean,"
             "precipitation_sum"
         ),
-
         "forecast_days": 3,
-
         "timezone": "Asia/Kolkata",
-
         "temperature_unit": "celsius",
         "wind_speed_unit": "ms",
         "precipitation_unit": "mm",
     }
 
-    try:
+    batch_data = None
 
-        response = None
+    for attempt in range(3):
+        try:
+            response = requests.get(
+                BASE_URL,
+                params=params,
+                timeout=(10, 60),
+            )
+            response.raise_for_status()
+            batch_data = response.json()
 
-        for attempt in range(3):
-
-            try:
-
-                response = requests.get(
-    BASE_URL,
-    params=params,
-    timeout=(10, 30)
-)
-
-                response.raise_for_status()
-                break
-
-            except requests.RequestException as e:
-
-                if attempt == 2:
-                    raise
-
-                wait_seconds = 2 ** (attempt + 1)
-
-                print(
-                    f"   Retry {attempt + 1}/2 "
-                    f"after error: {e}"
+            if not isinstance(batch_data, list):
+                raise ValueError(
+                    "Expected multiple weather responses; "
+                    "API did not return a list."
                 )
 
+            if len(batch_data) != len(batch):
+                raise ValueError(
+                    f"Expected {len(batch)} responses, "
+                    f"received {len(batch_data)}."
+                )
+
+            break
+
+        except (requests.RequestException, ValueError) as e:
+            if attempt == 2:
+                print(f"   BATCH FAILED: {e}", flush=True)
+                failures.extend(
+                    (r.district, r.state, str(e))
+                    for r in batch.itertuples()
+                )
+            else:
+                wait_seconds = 2 ** (attempt + 1)
+                print(
+                    f"   Retry {attempt + 1}/2 in "
+                    f"{wait_seconds}s: {e}",
+                    flush=True,
+                )
                 time.sleep(wait_seconds)
 
-        data = response.json()
+    if batch_data is None:
+        continue
 
-        daily = data.get("daily")
+    for row, data in zip(batch.itertuples(), batch_data):
+        try:
+            daily = data.get("daily")
+            if daily is None:
+                raise ValueError("No daily forecast returned.")
 
-        if daily is None:
-            raise ValueError(
-                "No daily forecast returned."
-            )
-
-        required_forecast_fields = [
-            "time",
-            "temperature_2m_mean",
-            "relative_humidity_2m_mean",
-            "wind_speed_10m_mean",
-            "precipitation_sum",
-        ]
-
-        missing_forecast_fields = [
-            field
-            for field in required_forecast_fields
-            if field not in daily
-        ]
-
-        if missing_forecast_fields:
-            raise ValueError(
-                "Open-Meteo response is missing fields: "
-                f"{missing_forecast_fields}"
-            )
-
-        weather = pd.DataFrame({
-    "date": daily["time"],
-
-    "T2M": daily[
-        "temperature_2m_mean"
-    ],
-
-    "RH2M": daily[
-        "relative_humidity_2m_mean"
-    ],
-
-    # Open-Meteo provides wind at 10 m in m/s.
-    # Convert approximately to 2 m to match NASA POWER WS2M.
-    "WS2M": (
-        pd.Series(daily["wind_speed_10m_mean"], dtype="float64")
-        * 0.748
-    ),
-
-    "PRECTOTCORR": daily[
-        "precipitation_sum"
-    ]
-})
-
-        weather["date"] = pd.to_datetime(
-            weather["date"],
-            errors="raise"
-        )
-
-        if weather.empty:
-            raise ValueError(
-                "Open-Meteo returned no weather records."
-            )
-
-        weather_features = [
-            "T2M",
-            "RH2M",
-            "WS2M",
-            "PRECTOTCORR",
-        ]
-
-        missing_values = weather[
-            weather_features
-        ].isna().sum()
-
-        if missing_values.any():
-            raise ValueError(
-                "Weather data contains missing values: "
-                f"{missing_values[missing_values > 0]}"
-            )
-
-        if len(weather) != 3:
-            raise ValueError(
-                f"Expected 3 forecast days for "
-                f"{district}, received {len(weather)}."
-            )
-
-        weather["district"] = district
-        weather["state"] = state
-
-        weather = weather[
-            [
-                "date",
-                "state",
-                "district",
-                "T2M",
-                "RH2M",
-                "WS2M",
-                "PRECTOTCORR"
+            missing_fields = [
+                field for field in required_forecast_fields
+                if field not in daily
             ]
-        ]
+            if missing_fields:
+                raise ValueError(
+                    f"Missing forecast fields: {missing_fields}"
+                )
 
-        all_weather.append(weather)
+            weather = pd.DataFrame({
+                "date": daily["time"],
+                "T2M": daily["temperature_2m_mean"],
+                "RH2M": daily["relative_humidity_2m_mean"],
+                "WS2M": (
+                    pd.Series(
+                        daily["wind_speed_10m_mean"],
+                        dtype="float64",
+                    ) * 0.748
+                ),
+                "PRECTOTCORR": daily["precipitation_sum"],
+            })
 
-        print(
-            "   OK:",
-            weather["date"].min().date(),
-            "to",
-            weather["date"].max().date()
-        )
+            weather["date"] = pd.to_datetime(
+                weather["date"], errors="raise"
+            )
 
-    except Exception as e:
+            if len(weather) != 3:
+                raise ValueError(
+                    f"Expected 3 forecast days; got {len(weather)}."
+                )
 
-        print(
-            "   ERROR:",
-            str(e)
-        )
+            if weather[weather_features].isna().any().any():
+                raise ValueError("Weather data contains missing values.")
 
-        failures.append(
-            (district, state, str(e))
-        )
+            weather["district"] = row.district
+            weather["state"] = row.state
 
-    # Small delay between requests
-    time.sleep(0.2)
+            all_weather.append(
+                weather[
+                    [
+                        "date", "state", "district",
+                        "T2M", "RH2M", "WS2M", "PRECTOTCORR",
+                    ]
+                ]
+            )
+
+            print(
+                f"   OK: {row.district}, {row.state}",
+                flush=True,
+            )
+
+        except (ValueError, TypeError, KeyError) as e:
+            print(
+                f"   ERROR: {row.district}, {row.state}: {e}",
+                flush=True,
+            )
+            failures.append((row.district, row.state, str(e)))
+
+    time.sleep(1)
 
 
 # ------------------------------------------------------------
