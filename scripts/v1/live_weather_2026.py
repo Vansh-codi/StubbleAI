@@ -147,7 +147,7 @@ for i, row in districts.iterrows():
                 response = requests.get(
     BASE_URL,
     params=params,
-    timeout=(5, 15)
+    timeout=(10, 30)
 )
 
                 response.raise_for_status()
@@ -158,7 +158,7 @@ for i, row in districts.iterrows():
                 if attempt == 2:
                     raise
 
-                wait_seconds = 2 ** attempt
+                wait_seconds = 2 ** (attempt + 1)
 
                 print(
                     f"   Retry {attempt + 1}/2 "
