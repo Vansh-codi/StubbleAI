@@ -145,10 +145,10 @@ for i, row in districts.iterrows():
             try:
 
                 response = requests.get(
-                    BASE_URL,
-                    params=params,
-                    timeout=30
-                )
+    BASE_URL,
+    params=params,
+    timeout=(5, 15)
+)
 
                 response.raise_for_status()
                 break

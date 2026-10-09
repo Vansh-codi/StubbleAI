@@ -48,7 +48,7 @@ jobs:
         run: python scripts/v1/build_live_2026_features.py
 
       - name: Update weather data
-        run: python scripts/v1/live_weather_2026.py
+        run: python -u scripts/v1/live_weather_2026.py
 
       - name: Generate predictions
         run: python scripts/v1/predict_2026.py
