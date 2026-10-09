@@ -100,11 +100,12 @@ print("Districts loaded:", len(districts))
 # 2. Download next-day weather
 # ------------------------------------------------------------
 
-
 all_weather = []
 failures = []
 
 BATCH_SIZE = 5
+MAX_ATTEMPTS = 3
+REQUEST_TIMEOUT = (10, 60)
 
 required_forecast_fields = [
     "time",
@@ -116,17 +117,18 @@ required_forecast_fields = [
 
 weather_features = ["T2M", "RH2M", "WS2M", "PRECTOTCORR"]
 
-for start_idx in range(0, len(districts), BATCH_SIZE):
-    batch = districts.iloc[start_idx:start_idx + BATCH_SIZE]
-    batch_no = start_idx // BATCH_SIZE + 1
-    total_batches = (len(districts) + BATCH_SIZE - 1) // BATCH_SIZE
+
+def fetch_weather_batch(batch, depth=0):
+    """Fetch a batch; split it into smaller batches if requests fail."""
+
+    names = [
+        f"{r.district}, {r.state}"
+        for r in batch.itertuples()
+    ]
 
     print(
-        f"\nBatch {batch_no}/{total_batches}: "
-        + ", ".join(
-            f"{r.district}, {r.state}"
-            for r in batch.itertuples()
-        ),
+        f"\nRequesting {len(batch)} district(s): "
+        + ", ".join(names),
         flush=True,
     )
 
@@ -146,54 +148,79 @@ for start_idx in range(0, len(districts), BATCH_SIZE):
         "precipitation_unit": "mm",
     }
 
-    batch_data = None
+    response_data = None
+    last_error = None
 
-    for attempt in range(3):
+    for attempt in range(MAX_ATTEMPTS):
         try:
             response = requests.get(
                 BASE_URL,
                 params=params,
-                timeout=(10, 60),
+                timeout=REQUEST_TIMEOUT,
             )
             response.raise_for_status()
-            batch_data = response.json()
+            response_data = response.json()
 
-            if not isinstance(batch_data, list):
+            # Open-Meteo may return a dictionary for one location
+            # and a list for multiple locations.
+            if isinstance(response_data, dict) and len(batch) == 1:
+                response_data = [response_data]
+
+            if not isinstance(response_data, list):
                 raise ValueError(
-                    "Expected multiple weather responses; "
-                    "API did not return a list."
+                    "Unexpected response format from Open-Meteo."
                 )
 
-            if len(batch_data) != len(batch):
+            if len(response_data) != len(batch):
                 raise ValueError(
-                    f"Expected {len(batch)} responses, "
-                    f"received {len(batch_data)}."
+                    f"Expected {len(batch)} responses; "
+                    f"received {len(response_data)}."
                 )
 
             break
 
-        except (requests.RequestException, ValueError) as e:
-            if attempt == 2:
-                print(f"   BATCH FAILED: {e}", flush=True)
-                failures.extend(
-                    (r.district, r.state, str(e))
-                    for r in batch.itertuples()
-                )
-            else:
+        except (requests.RequestException, ValueError) as exc:
+            last_error = str(exc)
+            response_data = None
+
+            if attempt < MAX_ATTEMPTS - 1:
                 wait_seconds = 2 ** (attempt + 1)
                 print(
-                    f"   Retry {attempt + 1}/2 in "
-                    f"{wait_seconds}s: {e}",
+                    f"   Attempt {attempt + 1} failed: {exc}. "
+                    f"Retrying in {wait_seconds}s.",
                     flush=True,
                 )
                 time.sleep(wait_seconds)
 
-    if batch_data is None:
-        continue
+    # If a multi-district request keeps failing, split it and retry.
+    if response_data is None:
+        if len(batch) > 1:
+            print(
+                f"   Splitting failed batch of {len(batch)} "
+                "into smaller requests.",
+                flush=True,
+            )
+            midpoint = len(batch) // 2
+            fetch_weather_batch(batch.iloc[:midpoint], depth + 1)
+            fetch_weather_batch(batch.iloc[midpoint:], depth + 1)
+        else:
+            row = batch.iloc[0]
+            failures.append(
+                (row["district"], row["state"], last_error or
+                 "Weather request failed.")
+            )
+            print(
+                f"   FINAL FAILURE: {row['district']}, "
+                f"{row['state']}: {last_error}",
+                flush=True,
+            )
+        return
 
-    for row, data in zip(batch.itertuples(), batch_data):
+    # Validate and save each district's result in memory.
+    for row, data in zip(batch.itertuples(), response_data):
         try:
             daily = data.get("daily")
+
             if daily is None:
                 raise ValueError("No daily forecast returned.")
 
@@ -229,7 +256,9 @@ for start_idx in range(0, len(districts), BATCH_SIZE):
                 )
 
             if weather[weather_features].isna().any().any():
-                raise ValueError("Weather data contains missing values.")
+                raise ValueError(
+                    "Weather forecast contains missing values."
+                )
 
             weather["district"] = row.district
             weather["state"] = row.state
@@ -248,14 +277,22 @@ for start_idx in range(0, len(districts), BATCH_SIZE):
                 flush=True,
             )
 
-        except (ValueError, TypeError, KeyError) as e:
+        except (ValueError, TypeError, KeyError) as exc:
+            failures.append(
+                (row.district, row.state, str(exc))
+            )
             print(
-                f"   ERROR: {row.district}, {row.state}: {e}",
+                f"   INVALID DATA: {row.district}, "
+                f"{row.state}: {exc}",
                 flush=True,
             )
-            failures.append((row.district, row.state, str(e)))
 
+
+for start_idx in range(0, len(districts), BATCH_SIZE):
+    batch = districts.iloc[start_idx:start_idx + BATCH_SIZE]
+    fetch_weather_batch(batch)
     time.sleep(1)
+
 
 
 # ------------------------------------------------------------
