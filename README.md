@@ -126,6 +126,11 @@ V3 is intended to build on the evidence from V2. It will be developed separately
 
 The fire panel contains aggregated district-level fire observations. The modelling dataset combines the fire panel with weather information and derived temporal features.
 
+## Daily Prediction Pipeline
+
+StubbleAI runs its scheduled prediction workflow through GitHub Actions.
+The workflow updates live prediction data and maintains prediction history.
+
 ### Satellite observations
 
 The documented fire-processing workflow uses VIIRS observations from NOAA-20 and Suomi-NPP products.
