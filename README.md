@@ -625,7 +625,27 @@ Related areas include:
 
 The project does not claim a measured reduction in pollution, emissions, or health impacts. These outcomes require separate evidence and impact evaluation.
 
+## StubbleAI V3 — Regional Fire Forecasting Research
 
+### Research Direction
+
+StubbleAI V3 aims to extend the forecasting framework across all eight Northeast Indian states while accounting for regional differences in climate, geography, vegetation, and agricultural fire patterns.
+
+### Planned Approach
+
+- **Regional coverage:** Expand the research scope to all eight Northeast states.
+- **Geographic sectors:** Organize the region into appropriate sectors based on geographic and climatic characteristics.
+- **Sector-specific forecasting:** Evaluate forecasting methods suited to each sector rather than assuming one model performs equally well everywhere.
+- **Common architecture:** Maintain a shared data-processing, feature-engineering, training, evaluation, and prediction framework across sectors.
+- **Hierarchical analysis:** Preserve state- and district-level reporting while exploring finer spatial and temporal analysis where data quality supports it.
+- **Rigorous evaluation:** Compare sector-specific approaches against suitable baselines using consistent validation and evaluation procedures.
+
+### Research Status
+
+- **V2:** Frozen research baseline. Existing experiments, evaluation results, and reproducibility records remain preserved.
+- **V3:** Planned research and development phase. Regional expansion, sector design, data preparation, and comparative experiments will be developed separately from the frozen V2 baseline.
+
+V3 is intended to build on the lessons from V2, not overwrite or replace its research results. Planned improvements will be evaluated before any claims of better forecasting performance are made.
 
 ## Disclaimer
 
