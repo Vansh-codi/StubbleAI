@@ -1,0 +1,7 @@
+source,year,requested_windows,returned_windows,failed_windows,missing_dates_due_to_failed_requests
+VIIRS_SNPP_SP,2023,13,13,0,
+VIIRS_SNPP_SP,2024,13,13,0,
+VIIRS_SNPP_SP,2025,13,13,0,
+VIIRS_NOAA20_SP,2023,13,13,0,
+VIIRS_NOAA20_SP,2024,13,13,0,
+VIIRS_NOAA20_SP,2025,13,13,0,

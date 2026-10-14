@@ -1,0 +1,3 @@
+source,study_start,study_end,available_min_date,available_max_date,covers_full_period,status
+VIIRS_SNPP_SP,2023-10-01,2025-11-30,2012-01-20,2026-06-30,True,OK
+VIIRS_NOAA20_SP,2023-10-01,2025-11-30,2018-04-01,2026-06-30,True,OK
