@@ -1,4 +1,5 @@
 import os
+import random
 import time
 from datetime import date, datetime, timedelta, timezone
 from io import StringIO
@@ -97,22 +98,18 @@ for source in SOURCES:
         # Retry request
         # --------------------------------------------------------
 
-        for attempt in range(3):
 
+        for attempt in range(5):
             try:
-
                 response = requests.get(
                     url,
                     timeout=60
                 )
-
                 response.raise_for_status()
                 break
 
             except requests.RequestException as e:
-
-                if attempt == 2:
-
+                if attempt == 4:
                     failures.append(
                         (
                             source,
@@ -122,29 +119,25 @@ for source in SOURCES:
                     )
 
                     print(
-                        f"  FAILED after 3 attempts: {e}"
+                        f"  FAILED after 5 attempts: {e}"
                     )
 
                     response = None
                     break
 
-                wait_seconds = 2 ** attempt
+                wait_seconds = min(60, 5 * (2 ** attempt))
+                jitter_seconds = random.uniform(0, 2)
+                total_wait = wait_seconds + jitter_seconds
 
                 print(
-                    f"  Retry {attempt + 1}/2 "
-                    f"after error: {e}"
+                    f"  Retry {attempt + 1}/4 "
+                    f"in {total_wait:.1f}s after error: {e}"
                 )
 
-                
-                time.sleep(wait_seconds)
-
+                time.sleep(total_wait)
         if response is None:
             continue
 
-        print(
-            "HTTP status:",
-            response.status_code
-        )
 
         # --------------------------------------------------------
         # Parse response
