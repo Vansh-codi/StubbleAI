@@ -18,3 +18,11 @@ data/processed/v3/
 
 # Local FIRMS candidate dataset (large input; keep out of Git)
 data/raw/firms/v3/firms_bbox_candidates_2023_2025.csv
+# V3 raw administrative boundary sources; retain locally, not in Git
+data/raw/boundaries/
+
+# Local backup copies; keep out of version control
+*.bak
+*.backup.csv
+*.pre_*.py
+*.before_status_correction.bak
