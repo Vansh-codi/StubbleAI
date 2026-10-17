@@ -12,3 +12,9 @@ frontend/dist/
 
 *.log
 .DS_Store
+
+# V3 generated panel outputs; keep scripts and research notes tracked
+data/processed/v3/
+
+# Local FIRMS candidate dataset (large input; keep out of Git)
+data/raw/firms/v3/firms_bbox_candidates_2023_2025.csv
