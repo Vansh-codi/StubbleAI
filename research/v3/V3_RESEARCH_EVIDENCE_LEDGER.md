@@ -219,3 +219,22 @@ Do not edit historical results to make them agree with later experiments. Correc
 - **Crop work is for the project:** crop-source evaluation, crop-feature experiments, and crop-aware deployment improvements must be documented here as project evidence; proposed improvements must not be described as validated until tested.
 - Keep V3 metrics and artifacts separate from Paper 1's reported results. Do not silently merge the six-state pilot or future crop findings into the paper's experiments.
 - Current six-state evidence covers October–November 2023–2025 only; it does not establish year-round performance or production readiness.
+
+## 9. Alternative-coordinate weather sensitivity audit
+
+### Original weather download quality
+
+Audit artifact:
+`data/processed/v3/experiments/weather_substitution/district_daily_weather_v3_centroid_sensitivity_audit.txt`
+
+The six-state weather collection covers 248 districts and 792 dates per district, from 2023-10-01 through 2025-11-30. The audit reports 196,416 rows, zero duplicate state-district-date keys, and zero missing values in T2M, RH2M, WS2M, and PRECTOTCORR. State row counts are Assam 27,720; Bihar 30,096; Haryana 17,424; Madhya Pradesh 43,560; Punjab 18,216; and Uttar Pradesh 59,400.
+
+**Quality caveat:** the audit explicitly warns that NASA POWER may use documented fill values. A zero null count does not establish that all parameter values are valid; inspect fill-value conventions and ranges before modelling.
+
+### Alternative-coordinate comparison
+
+The sensitivity experiment compared the original V3 district coordinates against centroids computed from the official district polygons for all 248 districts. The alternative coordinate file and downloaded weather are stored separately under `data/processed/v3/experiments/weather_substitution/`; the resumable downloader is under `scripts/v3/`.
+
+The recorded comparison found one-to-one matching of 196,416 district-date records and identical values for all four weather variables (T2M, RH2M, WS2M, PRECTOTCORR). Thus, this coordinate change produced no observed weather-input variation in the tested period.
+
+This is a null sensitivity result, not proof that different weather sources are interchangeable, that coordinates never affect retrieved values, or that all coordinate pairs necessarily share an internal NASA POWER grid cell. Do not claim predictive equivalence or rerun model comparisons on identical inputs as if this were a distinct weather treatment.
