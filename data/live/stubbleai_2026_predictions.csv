@@ -1,46 +1,46 @@
 prediction_date,state,district,risk_probability,risk_label,prediction_mode,fire_lag_1d,fire_lag_3d,fire_lag_7d,fire_mean_3d,fire_mean_7d,T2M,RH2M,WS2M,PRECTOTCORR,data_note
-2026-10-29,Punjab,Kapurthala,0.9386456586691729,Elevated,Live-history,13.0,8.0,2.0,10.0,6.0,23.3,56,0.4114,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Amritsar,0.9183590543003868,Elevated,Live-history,9.0,10.0,5.0,10.666666666666666,10.142857142857142,22.7,54,0.69564,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Gurdaspur,0.9100652860738372,Elevated,Live-history,4.0,11.0,1.0,9.0,4.714285714285714,22.2,61,0.62084,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Tarn Taran,0.8697849532035334,Elevated,Live-history,7.0,7.0,10.0,8.0,9.285714285714286,22.7,57,0.7180799999999999,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Patiala,0.834770566976283,Elevated,Live-history,3.0,2.0,0.0,3.0,2.0,22.7,60,1.40624,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Ferozepur,0.7832908343231795,Elevated,Live-history,6.0,3.0,1.0,6.0,3.571428571428572,22.5,60,0.8527199999999999,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,S A S Nagar,0.7347892253853553,Elevated,Live-history,2.0,5.0,1.0,4.333333333333333,2.2857142857142856,22.3,60,1.66804,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Fazilka,0.7180189763484912,Elevated,Live-history,1.0,7.0,0.0,2.6666666666666665,1.5714285714285714,23.1,58,0.5161199999999999,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Jalandhar,0.7092755565845732,Elevated,Live-history,2.0,5.0,0.0,3.6666666666666665,2.2857142857142856,23.4,53,0.62832,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Sri Muktsar Sahib,0.6159651035127218,Elevated,Live-history,0.0,9.0,0.0,3.0,1.2857142857142858,23.5,55,0.7854,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Ludhiana,0.6119686166261397,Elevated,Live-history,1.0,4.0,0.0,2.0,0.8571428571428571,23.0,60,0.90508,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Hoshiarpur,0.6064939585957323,Elevated,Live-history,5.0,3.0,0.0,3.333333333333333,1.8571428571428568,23.2,52,0.91256,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Pathankot,0.5010310047809267,Elevated,Live-history,2.0,5.0,0.0,2.333333333333333,1.0,21.1,59,1.09956,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Sirsa,0.5000065053460573,Elevated,Live-history,0.0,10.0,0.0,3.333333333333333,1.5714285714285714,23.2,59,1.07712,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Faridkot,0.42688074389251796,Elevated,Live-history,0.0,0.0,1.0,0.3333333333333333,0.5714285714285714,23.3,57,0.79288,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Fatehgarh Sahib,0.40588867046394694,Elevated,Live-history,1.0,2.0,0.0,1.3333333333333333,1.0,23.2,56,1.6456000000000002,0.1,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Bathinda,0.32789223005943696,Normal,Live-history,2.0,0.0,0.0,0.6666666666666666,0.2857142857142857,23.2,59,0.77044,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Shahid Bhagat Singh Nagar,0.3041731380806919,Normal,Live-history,2.0,0.0,0.0,0.6666666666666666,0.2857142857142857,23.5,56,1.24916,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Mansa,0.2972997324252597,Normal,Live-history,0.0,2.0,0.0,0.6666666666666666,0.2857142857142857,22.6,62,1.24916,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Palwal,0.28983505965792267,Normal,Live-history,1.0,4.0,0.0,2.6666666666666665,1.2857142857142858,23.6,67,1.87748,3.8,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Hisar,0.2358909055504154,Normal,Live-history,0.0,2.0,2.0,1.6666666666666667,1.1428571428571428,22.9,64,1.36136,0.3,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Faridabad,0.2349801300573878,Normal,Live-history,2.0,3.0,0.0,2.6666666666666665,1.1428571428571428,23.1,75,1.48852,6.2,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Malerkotla,0.23353058231243828,Normal,Live-history,0.0,1.0,0.0,0.3333333333333333,0.2857142857142857,22.6,62,1.1968,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Barnala,0.20897156770454303,Normal,Live-history,0.0,0.0,0.0,0.3333333333333333,0.1428571428571428,22.5,60,1.06964,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Sangrur,0.2023743066968909,Normal,Live-history,0.0,0.0,0.0,0.0,0.4285714285714285,22.9,61,1.30152,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Jind,0.17570426820491541,Normal,Live-history,0.0,2.0,0.0,0.6666666666666666,0.4285714285714285,22.0,64,1.28656,0.7,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Jhajjar,0.16177746605878784,Normal,Live-history,0.0,0.0,3.0,0.6666666666666666,1.1428571428571428,23.1,68,1.54836,11.3,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Rupnagar,0.16104576169444038,Normal,Live-history,0.0,1.0,1.0,0.3333333333333333,0.2857142857142857,22.6,61,1.09956,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Ambala,0.15041496035208282,Normal,Live-history,0.0,2.0,0.0,0.6666666666666666,0.2857142857142857,22.0,68,1.69796,0.4,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Sonipat,0.13210822152021684,Normal,Live-history,0.0,2.0,0.0,0.6666666666666666,0.4285714285714285,21.6,77,1.0322399999999998,11.2,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Panchkula,0.12989082006612362,Normal,Live-history,0.0,3.0,0.0,1.3333333333333333,0.5714285714285714,21.3,62,1.51096,0.3,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Punjab,Moga,0.12730896147283002,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,23.4,56,0.70312,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Karnal,0.12196521069441718,Normal,Live-history,0.0,0.0,0.0,0.3333333333333333,0.1428571428571428,22.2,73,1.15192,2.2,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Kurukshetra,0.10870967035889244,Normal,Live-history,0.0,1.0,0.0,0.6666666666666666,0.5714285714285714,22.3,67,1.5184399999999998,1.1,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Bhiwani,0.10757216996127586,Normal,Live-history,0.0,2.0,0.0,0.6666666666666666,0.2857142857142857,22.9,59,1.309,1.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Yamunanagar,0.09765213505755316,Normal,Live-history,0.0,0.0,0.0,0.0,0.1428571428571428,20.9,77,1.5708,1.8,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Rohtak,0.09397786952949427,Normal,Live-history,0.0,0.0,0.0,0.0,0.1428571428571428,21.3,79,1.22672,15.2,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Fatehabad,0.09097129878243701,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,22.8,64,1.31648,0.0,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Kaithal,0.08895638610049841,Normal,Live-history,0.0,0.0,0.0,0.3333333333333333,0.1428571428571428,22.9,60,1.27908,0.8,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Rewari,0.0789007524402814,Normal,Live-history,0.0,1.0,0.0,0.6666666666666666,0.2857142857142857,23.7,62,1.3838,12.2,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Gurugram,0.07337858409773947,Normal,Live-history,0.0,0.0,0.0,0.0,0.4285714285714285,23.0,71,1.39128,8.5,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Panipat,0.06413269481817532,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,21.7,71,1.16688,1.9,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Mahendragarh,0.045355566262617206,Normal,Live-history,0.0,1.0,0.0,0.3333333333333333,0.1428571428571428,23.4,62,1.16688,5.2,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Charkhi Dadri,0.036308921167916806,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,22.6,67,1.03972,6.1,Current 2026 FIRMS history used for fire-history features.
-2026-10-29,Haryana,Nuh,0.02169819025340269,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,23.8,64,1.76528,2.2,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Tarn Taran,0.9861450746883784,Elevated,Live-history,35.0,10.0,12.0,17.333333333333332,12.857142857142858,22.5,71,1.09956,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Gurdaspur,0.9680339524502333,Elevated,Live-history,17.0,12.0,3.0,11.0,7.0,22.1,70,0.92752,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Kapurthala,0.9556013203237798,Elevated,Live-history,10.0,9.0,3.0,10.666666666666666,7.142857142857143,22.7,68,1.10704,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Ferozepur,0.9522201178341037,Elevated,Live-history,11.0,9.0,0.0,8.666666666666666,5.0,22.6,72,1.20428,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Amritsar,0.8970547629417324,Elevated,Live-history,4.0,13.0,13.0,8.666666666666666,10.0,22.3,69,1.1968,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Fatehgarh Sahib,0.7959631463730859,Elevated,Live-history,9.0,1.0,1.0,3.6666666666666665,2.2857142857142856,22.5,69,0.8452399999999999,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Jalandhar,0.7818073833786866,Elevated,Live-history,7.0,4.0,0.0,4.333333333333333,3.2857142857142856,22.4,71,0.8527199999999999,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Patiala,0.7487146668797595,Elevated,Live-history,7.0,4.0,2.0,4.666666666666667,3.0,21.8,74,0.95744,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Hoshiarpur,0.7459428907168818,Elevated,Live-history,5.0,2.0,0.0,4.0,2.571428571428572,22.2,68,1.10704,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Fazilka,0.6080931222583004,Elevated,Live-history,2.0,0.0,1.0,1.0,1.8571428571428568,22.3,70,1.39128,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,S A S Nagar,0.571432827597098,Elevated,Live-history,2.0,6.0,1.0,3.333333333333333,2.4285714285714284,21.7,74,0.8228000000000001,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Bathinda,0.5001412657628336,Elevated,Live-history,2.0,0.0,0.0,1.3333333333333333,0.5714285714285714,22.5,73,0.96492,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Barnala,0.4755108552509066,Elevated,Live-history,2.0,1.0,0.0,1.0,0.4285714285714285,22.2,75,0.8527199999999999,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Shahid Bhagat Singh Nagar,0.4662215092417049,Elevated,Live-history,2.0,0.0,0.0,1.3333333333333333,0.5714285714285714,22.6,68,1.03972,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Moga,0.4451216533834298,Elevated,Live-history,3.0,0.0,0.0,1.0,0.4285714285714285,22.9,70,1.2117600000000002,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Ludhiana,0.44215519264573516,Elevated,Live-history,2.0,1.0,0.0,1.3333333333333333,1.1428571428571428,22.2,72,0.68816,0.1,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Malerkotla,0.4240467677087961,Elevated,Live-history,4.0,0.0,0.0,1.3333333333333333,0.8571428571428571,22.0,72,1.00232,0.1,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Faridkot,0.394906199220535,Normal,Live-history,1.0,1.0,2.0,0.6666666666666666,0.5714285714285714,22.9,70,1.32396,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Sri Muktsar Sahib,0.36064718075758473,Normal,Live-history,0.0,0.0,0.0,0.0,1.2857142857142858,22.7,69,1.3838,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Hisar,0.3171376590009005,Normal,Live-history,3.0,3.0,0.0,2.0,1.2857142857142858,21.7,77,1.122,2.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Sangrur,0.3040943554660596,Normal,Live-history,3.0,0.0,3.0,1.0,0.8571428571428571,22.2,76,0.91256,0.2,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Mansa,0.30159259784722314,Normal,Live-history,0.0,0.0,0.0,0.0,0.2857142857142857,22.2,77,1.01728,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Rupnagar,0.27961295351326937,Normal,Live-history,2.0,0.0,0.0,0.6666666666666666,0.4285714285714285,22.0,73,0.64328,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Punjab,Pathankot,0.2731491307672344,Normal,Live-history,2.0,0.0,0.0,1.3333333333333333,1.2857142857142858,20.3,74,0.94996,0.1,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Karnal,0.2679479615759901,Normal,Live-history,1.0,1.0,0.0,0.6666666666666666,0.2857142857142857,21.4,80,0.9724,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Kurukshetra,0.24442344481028383,Normal,Live-history,1.0,1.0,1.0,0.6666666666666666,0.7142857142857143,21.8,73,0.79288,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Faridabad,0.24205095003801005,Normal,Live-history,1.0,3.0,0.0,2.0,1.2857142857142858,21.2,86,1.40624,31.2,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Jhajjar,0.23844068704423535,Normal,Live-history,2.0,2.0,1.0,1.3333333333333333,1.0,20.8,86,1.496,14.2,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Jind,0.21475145438298582,Normal,Live-history,1.0,0.0,0.0,0.3333333333333333,0.5714285714285714,21.6,79,0.90508,0.1,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Panchkula,0.20830091696638864,Normal,Live-history,1.0,1.0,0.0,0.6666666666666666,0.7142857142857143,20.2,76,1.2342,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Kaithal,0.20470590388888232,Normal,Live-history,1.0,1.0,0.0,0.6666666666666666,0.2857142857142857,21.5,77,1.10704,3.3,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Sirsa,0.19198317475124949,Normal,Live-history,0.0,0.0,0.0,0.0,1.5714285714285714,22.3,71,1.13696,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Ambala,0.18928424140492847,Normal,Live-history,2.0,0.0,0.0,0.6666666666666666,0.5714285714285714,21.7,74,0.8527199999999999,0.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Palwal,0.17695983392949494,Normal,Live-history,0.0,3.0,0.0,1.3333333333333333,1.2857142857142858,21.8,82,1.71292,9.6,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Sonipat,0.15155248315046294,Normal,Live-history,1.0,0.0,0.0,0.3333333333333333,0.5714285714285714,20.7,85,1.2342,5.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Yamunanagar,0.151513474126976,Normal,Live-history,1.0,0.0,1.0,0.3333333333333333,0.2857142857142857,21.0,80,0.81532,1.1,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Rewari,0.13559344714290614,Normal,Live-history,0.0,1.0,0.0,0.3333333333333333,0.2857142857142857,20.8,85,1.46608,25.5,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Bhiwani,0.12602846043623203,Normal,Live-history,2.0,0.0,0.0,0.6666666666666666,0.5714285714285714,21.9,76,1.15192,3.3,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Gurugram,0.12330903359387323,Normal,Live-history,0.0,0.0,1.0,0.0,0.4285714285714285,20.0,93,1.36884,49.1,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Rohtak,0.09629214345338027,Normal,Live-history,0.0,0.0,0.0,0.0,0.1428571428571428,21.4,80,1.22672,5.9,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Panipat,0.08473363052822246,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,21.1,84,0.92752,2.9,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Fatehabad,0.07580290668636125,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,22.0,76,1.24916,1.2,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Mahendragarh,0.07236593490255058,Normal,Live-history,0.0,0.0,0.0,0.0,0.1428571428571428,21.6,78,1.67552,26.0,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Nuh,0.06972682531243979,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,20.9,85,1.66056,21.7,Current 2026 FIRMS history used for fire-history features.
+2026-10-30,Haryana,Charkhi Dadri,0.032188414908390264,Normal,Live-history,0.0,0.0,0.0,0.0,0.0,21.6,80,1.26412,4.3,Current 2026 FIRMS history used for fire-history features.
