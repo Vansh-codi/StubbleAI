@@ -1136,8 +1136,11 @@ date,state,district,fire_count
 2026-11-24,Punjab,Sangrur,6
 2026-11-24,Punjab,Sri Muktsar Sahib,10
 2026-11-25,Haryana,Bhiwani,2
-2026-11-25,Haryana,Hisar,3
+2026-11-25,Haryana,Faridabad,1
+2026-11-25,Haryana,Hisar,6
+2026-11-25,Haryana,Jhajjar,2
 2026-11-25,Haryana,Jind,1
+2026-11-25,Haryana,Panipat,1
 2026-11-25,Haryana,Rohtak,6
 2026-11-25,Haryana,Sirsa,2
 2026-11-25,Haryana,Sonipat,1
@@ -1145,7 +1148,7 @@ date,state,district,fire_count
 2026-11-25,Punjab,Bathinda,2
 2026-11-25,Punjab,Fatehgarh Sahib,1
 2026-11-25,Punjab,Fazilka,10
-2026-11-25,Punjab,Ludhiana,5
+2026-11-25,Punjab,Ludhiana,6
 2026-11-25,Punjab,Mansa,2
 2026-11-25,Punjab,Moga,4
 2026-11-25,Punjab,Patiala,3
